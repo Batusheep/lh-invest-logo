@@ -868,14 +868,13 @@ function describe(lane) {
   const pinned = new Set(Object.values(position.pins))
   const available = concept.items.map((_, index) => index).filter(index => !pinned.has(index))
   const freeSlots = Array.from({ length: lane.count }, (_, slot) => slot).filter(slot => position.pins[slot] === undefined)
-  const stride = freeSlots.length
-  const last = Math.max(0, available.length - stride)
-  const offset = Math.min(position.offset, last)
+  const offset = available.length ? position.offset % available.length : 0
+  const canPage = freeSlots.length > 0 && available.length > 1
   const displayed = Array.from({ length: lane.count }, (_, slot) => position.pins[slot] ?? null)
   freeSlots.forEach((slot, index) => {
-    displayed[slot] = available[offset + index] ?? null
+    if (index < available.length) displayed[slot] = available[(offset + index) % available.length]
   })
-  return { concept, position, available, freeSlots, stride, last, offset, displayed: position.held ?? displayed }
+  return { concept, position, available, freeSlots, canPage, offset, displayed: position.held ?? displayed }
 }
 
 function button({ action, lane, value, label, glyph, css = 'icon-button', pressed, disabled = false, body }) {
@@ -925,7 +924,7 @@ function renderLane(laneId) {
 
 function renderLaneControls(laneId) {
   const lane = lanes[laneId]
-  const { concept, stride, offset, last } = describe(lane)
+  const { concept, freeSlots, canPage } = describe(lane)
   const options = Object.entries(concepts).map(([id, option]) => {
     const current = id === lane.conceptId
     return `<button type="button" class="concept-option" data-action="concept" data-lane="${laneId}" data-value="${html(id)}"${current ? ' aria-current="true"' : ''} style="--concept-accent:${html(option.color)}">
@@ -941,10 +940,10 @@ function renderLaneControls(laneId) {
           <div class="concept-options" role="group" aria-label="${titleFor(laneId, 'Концепции')}">${options}</div>
         </details>
       </div>`,
-    actions: `<div class="pager" role="group" aria-label="${titleFor(laneId, stride ? 'Листание материалов' : 'Все видимые кадры закреплены')}">
-          ${button({ action: 'page', lane: laneId, value: -1, label: titleFor(laneId, 'Предыдущие материалы'), glyph: 'left', disabled: !stride || offset === 0 })}
+    actions: `<div class="pager" role="group" aria-label="${titleFor(laneId, freeSlots.length ? 'Листание материалов' : 'Все видимые кадры закреплены')}">
+          ${button({ action: 'page', lane: laneId, value: -1, label: titleFor(laneId, 'Предыдущие материалы'), glyph: 'left', disabled: !canPage })}
           ${button({ action: 'catalog', lane: laneId, label: titleFor(laneId, 'Все материалы'), css: 'icon-button catalog-button', glyph: 'grid' })}
-          ${button({ action: 'page', lane: laneId, value: 1, label: titleFor(laneId, 'Следующие материалы'), glyph: 'right', disabled: !stride || offset === last })}
+          ${button({ action: 'page', lane: laneId, value: 1, label: titleFor(laneId, 'Следующие материалы'), glyph: 'right', disabled: !canPage })}
       </div>`,
   }
 }
@@ -1052,10 +1051,9 @@ function updateLayout(laneId, count) {
 }
 
 function changePage(laneId, direction) {
-  const { position, stride, offset, last } = describe(lanes[laneId])
-  if (!stride || (direction < 0 && offset === 0) || (direction > 0 && offset === last)) return
-  if (direction < 0) position.offset = Math.max(0, Math.ceil(offset / stride - 1) * stride)
-  else position.offset = Math.min(last, offset + stride)
+  const { position, available, canPage, offset } = describe(lanes[laneId])
+  if (!canPage) return
+  position.offset = (offset + direction + available.length) % available.length
   position.held = null
   render()
 }
@@ -1135,16 +1133,17 @@ document.addEventListener('fullscreenchange', () => {
 
 function pickItem(laneId, index) {
   catalog.close()
-  const { position, displayed, available, stride, last } = describe(lanes[laneId])
+  const { position, displayed, available, freeSlots } = describe(lanes[laneId])
   if (displayed.includes(index)) {
     document.querySelector('[data-focus="zoom-' + laneId + '-' + index + '"]')?.focus()
     return
   }
-  if (!stride || !available.includes(index)) {
+  const target = available.indexOf(index)
+  if (!freeSlots.length || target === -1) {
     openZoom(laneId, index)
     return
   }
-  position.offset = Math.min(last, Math.floor(available.indexOf(index) / stride) * stride)
+  position.offset = target
   position.held = null
   render()
   document.querySelector('[data-focus="zoom-' + laneId + '-' + index + '"]')?.focus()
