@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#eceaf3">
+  <title>Обзор концепций · Landing Heroes</title>
+  <!-- STYLES -->
+</head>
+<body>
+  <main id="stage" class="stage" data-mode="view" aria-label="Холст с концепциями"></main>
+
+  <nav class="dock" aria-label="Управление презентацией">
+    <div id="dock-left" class="dock-panel dock-side"></div>
+    <div id="dock-middle" class="dock-panel dock-center"><div id="dock-navigation"></div></div>
+    <div id="dock-end" class="dock-panel dock-side">
+      <div id="dock-right" hidden></div>
+      <div id="dock-settings">
+    <div class="segmented mode-control" role="group" aria-label="Режим презентации">
+      <button id="mode-view" class="mode-button" type="button" data-action="mode" data-value="view" aria-pressed="true" aria-label="Показ" title="Показ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
+      </button>
+      <button id="mode-compare" class="mode-button" type="button" data-action="mode" data-value="compare" aria-pressed="false" aria-label="Сравнение" title="Сравнение">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="7" height="13" rx="1.6"/><rect x="13.5" y="5.5" width="7" height="13" rx="1.6"/></svg>
+      </button>
+    </div>
+      <div class="layout-menu">
+        <button type="button" id="layout-toggle" class="icon-button" aria-label="Число кадров на холсте" aria-controls="global-controls" aria-expanded="false" title="Число кадров на холсте">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.6"/></svg>
+        </button>
+        <div id="global-controls" hidden></div>
+      </div>
+      </div>
+    </div>
+  </nav>
+
+  <dialog id="catalog-dialog" class="catalog-dialog" aria-label="Материалы концепции"></dialog>
+  <dialog id="zoom-dialog" class="zoom-dialog" aria-label="Просмотр кадра"></dialog>
+  <div id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+  <!-- SCRIPTS -->
+</body>
+</html>

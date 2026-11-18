@@ -1,0 +1,6 @@
+# Исключённое из репозитория
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
