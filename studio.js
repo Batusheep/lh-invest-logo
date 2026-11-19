@@ -1,16 +1,3 @@
-const testVersions = [
-  ['', ''],
-  ['-2', 'Бренд в клиентском кабинете'],
-  ['-3', 'Демонстрация для партнёров'],
-  ['-4', 'Запуск под брендом клиента'],
-]
-const concepts = Object.fromEntries(testVersions.flatMap(([suffix, context], index) =>
-  Object.entries(baseConcepts).map(([id, concept]) => {
-    if (!suffix) return [id, concept]
-    const title = id.toUpperCase() + (index + 1) + ' · ' + context + ' — ' + concept.title.split(' · ')[1]
-    return [id + suffix, { ...concept, title }]
-  })))
-
 const glyphs = {
   left: '<path d="m14 6-6 6 6 6"/>',
   right: '<path d="m10 6 6 6-6 6"/>',
@@ -38,7 +25,8 @@ function newLane(conceptId, count) {
   return { conceptId, count, positions: {} }
 }
 
-const lanes = { solo: newLane('a', 3), left: newLane('a', 1), right: newLane('b', 1) }
+const [firstName, secondName] = Object.keys(concepts)
+const lanes = { solo: newLane(firstName, 2), left: newLane(firstName, 1), right: newLane(secondName, 1) }
 const laneTitles = { solo: 'Концепция', left: 'Слева', right: 'Справа' }
 const stage = document.querySelector('#stage')
 const globalControls = document.querySelector('#global-controls')
@@ -48,7 +36,6 @@ const dockMiddle = document.querySelector('#dock-middle')
 const dockEnd = document.querySelector('#dock-end')
 const dockSettings = document.querySelector('#dock-settings')
 const dockNavigation = document.querySelector('#dock-navigation')
-const layoutToggle = document.querySelector('#layout-toggle')
 const layoutMenu = document.querySelector('.layout-menu')
 const catalog = document.querySelector('#catalog-dialog')
 const zoom = document.querySelector('#zoom-dialog')
@@ -58,6 +45,90 @@ let mode = 'view'
 let modeTransition
 let compareStarted = false
 let activeSide = 'left'
+const names = Object.values(concepts).map(c => c.title)
+const markGroups = [...new Set(studioVariants.map(v => v.group))]
+const typeRules = ['cds','hds','dgc','cds','hsc','ghb','gcd','bcd','hgd','cgh','sdc','cbd','hsg','dch','gcs','gcd','ghs','gds']
+const fonts = {
+  c: ['RobotoLocal, sans-serif',650,'77%'], d:['RobotoLocal, sans-serif',730,'100%'],
+  g:['RobotoLocal, sans-serif',540,'100%'], h:['Segoe UI, sans-serif',600,'100%'],
+  s:['Georgia, serif',400,'100%'], b:['Georgia, serif',700,'100%'],
+}
+const assemblies = new Map()
+const selectedNames = {}
+function namingDocument(laneId, selectedName) {
+  const name = selectedName ?? selectedNames[laneId] ?? concepts[lanes[laneId].conceptId].title
+  const concept = Object.values(concepts).find(c => c.title === name)
+  if (!concept) return '<h1>' + html(name) + '</h1><p>Для этого названия пока нет описания.</p>'
+  const source = concept.items.find(item => item.document)?.document || ''
+  const parsed = new DOMParser().parseFromString(source, 'text/html')
+  const firstSection = []
+  for (const element of parsed.body.children) {
+    if (element.tagName === 'H2' && firstSection.some(e => e.tagName === 'H2')) break
+    firstSection.push(element)
+  }
+  return firstSection.map(element => element.outerHTML).join('')
+}
+function refreshNaming(laneId, name) {
+  selectedNames[laneId] = name
+  document.querySelectorAll('.lane[data-lane="'+laneId+'"] .document-preview').forEach(el => { el.innerHTML = namingDocument(laneId) })
+}
+function assemblyFor(laneId, concept, item) {
+  const key = laneId + '/' + concept.title + '/' + item.key
+  if (!assemblies.has(key)) {
+    const mark = studioVariants.findIndex(v => v.id === item.key)
+    const variant = studioVariants[mark]
+    assemblies.set(key, { mark, name:concept.title, subtitle:'Инвестиционная платформа', colors:[...variant.palette], text:'#262626', palette:'original' })
+  }
+  return assemblies.get(key)
+}
+function assemblyVisual(state) {
+  const variant = studioVariants[state.mark]
+  let svg = variant.svg
+  variant.palette.forEach((color, i) => {
+    svg = svg.replace(new RegExp(color, 'gi'), state.colors[i] || state.colors[0] || color)
+  })
+  const img = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg)
+  const group = markGroups.indexOf(variant.group)
+  const index = Number(variant.id.split('-').at(-1)) - 1
+  const font = fonts[typeRules[group]?.[index % 3] || 'd']
+  return { variant, img, font }
+}
+function renderAssembly(laneId, state, item, index) {
+  const assembly = assemblyFor(laneId, state.concept, item)
+  const { variant, img, font } = assemblyVisual(assembly)
+  const markOptions = markGroups.map(group => '<optgroup label="' + html(group) + '">' + studioVariants.filter(v => v.group === group).map(v => '<option value="'+html(v.id)+'"'+(v.id===variant.id?' selected':'')+'>'+html(v.label)+'</option>').join('')+'</optgroup>').join('')
+  const nameOptions = names.map(name => '<option value="'+html(name)+'"'+(name===assembly.name?' selected':'')+'>'+html(name)+'</option>').join('')
+  const controls = 'data-lane="'+laneId+'" data-index="'+index+'"'
+  return `<div class="live-slide" ${controls}>
+    <div class="live-header"><span>${html(variant.group.toUpperCase())}</span><span>LANDING<br>HEROES</span></div>
+    <div class="naming-popover"><button class="naming-trigger" type="button" aria-label="Идея названия ${html(assembly.name)}" aria-describedby="naming-${laneId}-${index}">Аа</button><div class="naming-tip markdown-copy" id="naming-${laneId}-${index}" role="tooltip">${namingDocument(laneId, assembly.name)}</div></div>
+    <div class="live-main">
+      <div class="live-mark"><img src="${img}" alt=""></div>
+      <div class="live-name"><span style="font-family:${font[0]};font-weight:${font[1]};font-stretch:${font[2]};color:${html(assembly.text)}">${html(assembly.name)}</span></div>
+    </div>
+    <div class="live-sub">${html(assembly.subtitle ?? 'Инвестиционная платформа')}</div>
+    <div class="live-switches"><div><span>Знак</span><button data-live="mark-prev" aria-label="Предыдущий знак">←</button><button data-live="mark-next" aria-label="Следующий знак">→</button></div><div><span>Название</span><button data-live="name-prev" aria-label="Предыдущее название">←</button><button data-live="name-next" aria-label="Следующее название">→</button></div></div>
+    <div class="live-app" aria-label="Пример в интерфейсе">
+      <div class="live-app-side">
+        <div class="live-app-brand"><img src="${img}" alt=""><div><strong style="font-family:${font[0]};font-weight:${font[1]};font-stretch:${font[2]};color:${html(assembly.text)}">${html(assembly.name)}</strong><span>${html(assembly.subtitle ?? 'Инвестиционная платформа')}</span></div></div>
+        <div class="live-app-caption">Инвестиции</div>
+        <div class="live-app-link"><span>⌂</span>Обзор</div><div class="live-app-link"><span>⊞</span>Инвестиции</div><div class="live-app-link selected"><span>♙</span>Профиль</div><div class="live-app-link"><span>♧</span>Уведомления</div>
+        <div class="live-app-caption">Ещё</div><div class="live-app-link"><span>▱</span>Баланс</div><div class="live-app-link"><span>▥</span>Аналитика</div>
+      </div>
+      <div class="live-app-content"><div class="live-app-breadcrumb">Личный кабинет&nbsp; / &nbsp;<b>Профиль</b></div><strong class="live-app-title">Ваш профиль</strong><div class="live-app-description">Личные данные, документы и реквизиты</div><div class="live-app-card"><strong>Подтвердите личность</strong><p>Это нужно, чтобы инвестировать.</p><div class="live-app-steps"><span>✓</span><i></i><span>2</span></div><div class="live-app-columns"><div><b>Телефон</b><small>Подтверждено</small></div><div><b>Персональные данные</b><small>Следующий шаг</small></div></div><div class="live-app-action">Заполнить данные</div></div></div>
+    </div>
+    <div class="live-settings"><div class="live-panel">
+      <label>Знак<select data-live-input="mark">${markOptions}</select></label>
+      <label>Название<select data-live-input="name">${nameOptions}</select></label>
+      <label>Своё название<input data-live-input="custom" maxlength="32" value="${html(assembly.name)}"></label>
+      <label>Подпись<input data-live-input="subtitle" maxlength="56" value="${html(assembly.subtitle ?? 'Инвестиционная платформа')}"></label>
+      <label>Палитра<select data-live-input="palette">${[['original','Исходная'],['ink','Графит'],['blue','Синий'],['forest','Зелёный и терракота'],['violet','Фиолетовый и бирюза'],['custom','Своя']].map(([value,label])=>'<option value="'+value+'"'+(assembly.palette===value?' selected':'')+'>'+label+'</option>').join('')}</select></label>
+      <div class="live-colors">${assembly.colors.map((color,i)=>'<label>Знак '+(i+1)+'<input type="color" data-live-input="color" data-color-index="'+i+'" value="'+html(color)+'"></label>').join('')}<label>Текст<input type="color" data-live-input="text" value="${html(assembly.text)}"></label></div>
+      <div class="text-swatches" aria-label="Цвет текста из логотипа"><span>Текст из знака</span><div>${[...new Set(['#262626', ...assembly.colors])].map(color=>'<button type="button" data-live="text-color" data-color="'+html(color)+'" style="--swatch:'+html(color)+'" aria-label="Цвет текста '+html(color)+'" aria-pressed="'+(assembly.text.toLowerCase()===color.toLowerCase())+'"></button>').join('')}</div></div>
+      <label>Пресет<select data-live-input="preset"><option value="">Выберите сочетание</option><option value="modus-1">Модус · шаг меры</option><option value="osnova-2">Основа · гнездо</option><option value="frame-1">Frame · угольник</option><option value="stapel-1">Стапель · киль</option></select></label>
+    </div></div>
+  </div>`
+}
 
 function positionFor(lane) {
   return lane.positions[lane.conceptId] ??= { pins: {}, offset: 0, held: null }
@@ -101,12 +172,9 @@ function renderFrame(laneId, state, index, slot) {
   const controls = `data-action="zoom" data-lane="${laneId}" data-value="${index}" data-focus="zoom-${laneId}-${index}" aria-label="Увеличить · ${label}"`
   const expand = `<span class="frame-expand">${icon('expand')}</span>`
   const visual = isDocument
-    ? `<article class="markdown-copy document-preview" aria-label="${label}">${material.document}</article>
+    ? `<article class="markdown-copy document-preview" aria-label="Описание названия">${namingDocument(laneId)}</article>
         <button class="frame-expand document-expand" type="button" ${controls}>${icon('expand')}</button>`
-    : `<button class="frame-open" type="button" ${controls}>
-        <img src="${material.image}" alt="${label} · ${html(state.concept.title)}" draggable="false">
-        ${expand}
-      </button>`
+    : renderAssembly(laneId, state, material, index)
   return `<figure class="frame" data-kind="${isDocument ? 'document' : 'image'}" data-key="${html(material.key)}" data-material="${index}" data-pinned="${pinned}" style="--media-bg:${html(material.background)}">
     <div class="frame-visual">
       ${visual}
@@ -151,7 +219,8 @@ function renderLaneControls(laneId) {
 
 function renderControls() {
   if (mode === 'view') {
-    const options = Array.from({ length: 6 }, (_, index) => {
+    const maxCount = Math.min(6, concepts[lanes.solo.conceptId].items.length)
+    const options = Array.from({ length: maxCount }, (_, index) => {
       const count = index + 1
       return button({ action: 'layout', lane: 'solo', value: count, label: 'Кадров на холсте: ' + count, css: 'layout-button', pressed: count === lanes.solo.count, body: count })
     })
@@ -160,7 +229,8 @@ function renderControls() {
   }
   const options = ['left', 'right'].map(laneId => {
     const other = laneId === 'left' ? 'right' : 'left'
-    const choices = Array.from({ length: 6 - lanes[other].count }, (_, index) => {
+    const maxCount = Math.min(6 - lanes[other].count, concepts[lanes[laneId].conceptId].items.length)
+    const choices = Array.from({ length: maxCount }, (_, index) => {
       const count = index + 1
       return button({ action: 'layout', lane: laneId, value: count,
         label: 'Кадров ' + laneTitles[laneId].toLowerCase() + ': ' + count,
@@ -182,13 +252,12 @@ function render() {
   const active = document.activeElement
   const focus = active?.dataset.focus
   stage.dataset.mode = mode
-  const settingsParent = mode === 'view' ? dockEnd : dockMiddle
-  if (dockSettings.parentElement !== settingsParent) {
-    settingsParent.append(dockSettings)
-    if (dockSettings.contains(active)) active.focus({ preventScroll: true })
-  }
   dockRight.hidden = mode === 'view'
   stage.innerHTML = (mode === 'view' ? ['solo'] : ['left', 'right']).map(renderLane).join('')
+  const preview = describe(lanes[mode === 'view' ? 'solo' : activeSide])
+  const mark = preview.displayed.map(i => preview.concept.items[i]).find(item => item?.mark)
+    ?? preview.concept.items.find(item => item.mark)
+  document.querySelector('.mockup-launch').href = 'logo-mockup.html#' + mark.key
   if (mode === 'view') {
     const { identity, actions } = renderLaneControls('solo')
     dockLeft.innerHTML = identity
@@ -213,6 +282,12 @@ function openMode(value) {
   if (value === 'compare' && !compareStarted) {
     const source = lanes.solo
     const { displayed, position } = describe(source)
+    const sourceTitle = concepts[source.conceptId].title
+    for (const [key, value] of assemblies) {
+      const prefix = 'solo/' + sourceTitle + '/'
+      if (key.startsWith(prefix)) assemblies.set('left/' + sourceTitle + '/' + key.slice(prefix.length), structuredClone(value))
+    }
+    selectedNames.left = selectedNames.solo || sourceTitle
     const firstPin = Object.values(position.pins)[0]
     const copy = { pins: firstPin === undefined ? {} : { 0: firstPin }, offset: position.offset, held: null }
     lanes.left = { conceptId: source.conceptId, count: 1, positions: { [source.conceptId]: copy } }
@@ -304,7 +379,7 @@ function openZoom(laneId, index) {
   zoom.innerHTML = '<div class="zoom-surface">'
     + button({ action: 'close', label: 'Закрыть полноэкранный просмотр', glyph: 'close', css: 'icon-button zoom-close' })
     + (isDocument
-      ? `<div class="document-reader-scroll" tabindex="0"><article class="markdown-copy document-reader">${item.document}</article></div>`
+      ? `<div class="document-reader-scroll" tabindex="0"><article class="markdown-copy document-reader">${namingDocument(laneId)}</article></div>`
       : `<div class="zoom-content" style="--media-bg:${html(item.background)}"><img class="zoom-image" src="${item.image}" alt="${html(item.label)}"></div>`)
     + '</div>'
   zoom.showModal()
@@ -351,24 +426,8 @@ function pickItem(laneId, index) {
 }
 
 function setLayoutMenu(open) {
-  globalControls.hidden = !open
-  layoutToggle.setAttribute('aria-expanded', String(open))
   if (!open) globalControls.querySelectorAll('details[open]').forEach(menu => { menu.open = false })
 }
-
-layoutMenu.addEventListener('pointerenter', event => {
-  if (event.pointerType === 'mouse') setLayoutMenu(true)
-})
-layoutMenu.addEventListener('pointerleave', event => {
-  if (event.pointerType === 'mouse' && !layoutMenu.querySelector(':focus-visible')) setLayoutMenu(false)
-})
-layoutToggle.addEventListener('click', event => {
-  const mouseClick = event.detail > 0 && matchMedia('(hover: hover) and (pointer: fine)').matches
-  setLayoutMenu(mouseClick || globalControls.hidden)
-})
-layoutMenu.addEventListener('focusout', event => {
-  if (event.relatedTarget && !layoutMenu.contains(event.relatedTarget) && !layoutMenu.matches(':hover')) setLayoutMenu(false)
-})
 
 document.addEventListener('toggle', event => {
   const menu = event.target
@@ -379,6 +438,28 @@ document.addEventListener('toggle', event => {
 }, true)
 
 document.addEventListener('click', event => {
+  const liveButton = event.target.closest('[data-live]')
+  if (liveButton) {
+    const slide = liveButton.closest('.live-slide')
+    const lane = lanes[slide.dataset.lane]
+    const concept = concepts[lane.conceptId]
+    const item = concept.items[Number(slide.dataset.index)]
+    const state = assemblyFor(slide.dataset.lane, concept, item)
+    const action = liveButton.dataset.live
+    if (action === 'text-color') {
+      state.text = liveButton.dataset.color
+    } else if (action.startsWith('mark')) {
+      state.mark = (state.mark + (action.endsWith('next') ? 1 : -1) + studioVariants.length) % studioVariants.length
+      const palette = studioVariants[state.mark].palette
+      state.colors = state.palette === 'original' ? [...palette] : palette.map((_,i) => state.colors[i % state.colors.length])
+    } else {
+      const i = names.indexOf(state.name)
+      state.name = names[(Math.max(0,i) + (action.endsWith('next') ? 1 : -1) + names.length) % names.length]
+      refreshNaming(slide.dataset.lane, state.name)
+    }
+    slide.outerHTML = renderAssembly(slide.dataset.lane, {concept}, item, Number(slide.dataset.index))
+    return
+  }
   document.querySelectorAll('.choice-menu[open]').forEach(menu => {
     if (!menu.contains(event.target)) menu.open = false
   })
@@ -395,6 +476,8 @@ document.addEventListener('click', event => {
     case 'mode': openMode(value); break
     case 'concept':
       lanes[lane].conceptId = value
+      selectedNames[lane] = concepts[value].title
+      lanes[lane].count = Math.min(lanes[lane].count, concepts[value].items.length)
       render()
       document.querySelector('[data-focus="concept-' + lane + '"]').focus({ preventScroll: true })
       break
@@ -414,6 +497,49 @@ document.addEventListener('click', event => {
   }
 })
 
+document.addEventListener('change', event => {
+  const input = event.target.closest('[data-live-input]')
+  if (!input) return
+  const slide = input.closest('.live-slide')
+  const laneId = slide.dataset.lane
+  const concept = concepts[lanes[laneId].conceptId]
+  const item = concept.items[Number(slide.dataset.index)]
+  const state = assemblyFor(laneId, concept, item)
+  const change = input.dataset.liveInput
+  if (change === 'mark' || change === 'preset') {
+    if (!input.value) return
+    state.mark = studioVariants.findIndex(v => v.id === input.value)
+    const v = studioVariants[state.mark]
+    if (change === 'preset') { state.name = v.name; state.palette = 'original'; state.text = '#262626' }
+    state.colors = state.palette === 'original' ? [...v.palette] : v.palette.map((_,i) => state.colors[i % state.colors.length])
+  } else if (change === 'name' || change === 'custom') state.name = input.value || concept.title
+  else if (change === 'subtitle') state.subtitle = input.value
+  else if (change === 'color') { state.colors[Number(input.dataset.colorIndex)] = input.value; state.palette = 'custom' }
+  else if (change === 'text') { state.text = input.value; state.palette = 'custom' }
+  else if (change === 'palette') {
+    const palettes = { ink:['#262626'], blue:['#28528a'], forest:['#245e50','#c15e3b'], violet:['#57418b','#168478'] }
+    if (input.value === 'custom') return
+    const colors = change && (palettes[input.value] || studioVariants[state.mark].palette)
+    state.colors = studioVariants[state.mark].palette.map((_,i) => colors[i % colors.length])
+    state.text = input.value === 'original' ? '#262626' : colors[0]
+    state.palette = input.value
+  }
+  const index = Number(slide.dataset.index)
+  if (change === 'name' || change === 'custom' || change === 'preset') refreshNaming(laneId, state.name)
+  slide.outerHTML = renderAssembly(laneId, {concept}, item, index)
+})
+
+document.addEventListener('input', event => {
+  const input = event.target.closest('[data-live-input="subtitle"]')
+  if (!input) return
+  const slide = input.closest('.live-slide')
+  const concept = concepts[lanes[slide.dataset.lane].conceptId]
+  const item = concept.items[Number(slide.dataset.index)]
+  assemblyFor(slide.dataset.lane, concept, item).subtitle = input.value
+  slide.querySelector('.live-sub').textContent = input.value
+  slide.querySelector('.live-app-brand span').textContent = input.value
+})
+
 document.addEventListener('keydown', event => {
   if (catalog.open || zoom.open || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
   const choiceMenu = event.target.closest('.choice-menu[open]') ?? document.querySelector('.choice-menu[open]')
@@ -429,11 +555,6 @@ document.addEventListener('keydown', event => {
       : (current + (event.key === 'ArrowDown' ? 1 : -1) + choices.length) % choices.length
     event.preventDefault()
     choices[next].focus()
-    return
-  }
-  if (event.key === 'Escape' && !globalControls.hidden) {
-    setLayoutMenu(false)
-    layoutToggle.focus()
     return
   }
   if (event.target.matches('select, input, textarea') || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return

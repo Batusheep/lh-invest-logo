@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="modus-title">
+  <title id="modus-title">Модус — Сгиб М</title>
+  <g fill="#000000">
+    <path d="M24 76.25 66 52 128 114 190 52 232 76.25V194.75L190 219V116L128 178 66 116V219L24 194.75Z"/>
+    <path d="M65 38H119L155 74 128 101Z"/>
+  </g>
+</svg>

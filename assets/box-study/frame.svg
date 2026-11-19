@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="frame-box-title">
+  <title id="frame-box-title">Frame — Клапан F</title>
+  <g fill="#000000">
+    <path d="M37 68 175 31 226 60.5 176 74 171 86 148.4 92.1 143 82.8 88 97.5Z"/>
+    <path d="M32 78 83 107.5V233.5L32 204Z"/>
+    <path d="M94 107 136 95.7 141.4 105 177 95.4 182 83.4 230 70.5V102L130 128.8V153L207 132.4V163.5L130 184.1V221.3L94 231Z"/>
+  </g>
+</svg>

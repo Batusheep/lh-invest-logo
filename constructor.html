@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конструктор логотипа · Landing Heroes</title><!-- STYLES --></head>
+<body>
+<header class="top"><a href="brand-review.html">← Все концепции</a><span>LANDING HEROES / ИНВЕСТИЦИОННАЯ ПЛАТФОРМА</span><a href="logo-mockup.html">В интерфейсе ↗</a></header>
+<main>
+  <div class="heading"><div><p class="eyebrow">БРЕНД-КОНСТРУКТОР</p><h1>Соберите свой вариант</h1><p>Меняйте знак, название и цвет независимо друг от друга.</p></div><button id="reset" class="subtle">Сбросить настройки ↺</button></div>
+  <section class="workspace" aria-label="Конструктор логотипа">
+    <div class="preview">
+      <div class="preview-top"><span>ПРЕДПРОСМОТР</span><span id="preview-label"></span></div>
+      <div class="assembly">
+        <div class="part"><div class="part-controls"><span>ЗНАК</span><div><button data-step="mark:-1" aria-label="Предыдущий знак">↑</button><button data-step="mark:1" aria-label="Следующий знак">↓</button></div></div><div id="mark" class="mark"></div></div>
+        <div class="part name-part"><div class="part-controls"><span>НАЗВАНИЕ</span><div><button data-step="name:-1" aria-label="Предыдущее название">↑</button><button data-step="name:1" aria-label="Следующее название">↓</button></div></div><div id="word" class="word"></div></div>
+      </div>
+      <div class="preview-bottom"><span>Платформа для инвестиционных сервисов</span><span>LANDING HEROES</span></div>
+    </div>
+    <aside class="settings">
+      <div class="settings-heading"><div><p class="eyebrow">НАСТРОЙКИ</p><h2>Ваша комбинация</h2></div><span class="indicator"></span></div>
+      <label>Знак <select id="mark-select"></select></label>
+      <label>Название <select id="name-select"></select></label>
+      <label>Написание <select id="name-language"><option value="ru">Русское</option><option value="latin">Латиница</option></select></label>
+      <label class="invest-option"><input id="add-invest" type="checkbox"> Добавить Инвест / Invest</label>
+      <label>Своё название <input id="custom-name" type="text" maxlength="32" placeholder="Введите название"></label>
+      <div class="type-info" id="type-info"></div>
+      <fieldset><legend>Цвет</legend><div class="palettes" id="palettes"></div><div class="color-fields" id="color-fields"></div></fieldset>
+    </aside>
+  </section>
+  <section class="presets"><div><p class="eyebrow">ГОТОВЫЕ СОЧЕТАНИЯ</p><h2>Начните с идеи</h2><p>Выберите пресет и продолжайте менять его элементы.</p></div><div id="presets" class="preset-grid"></div></section>
+</main><!-- SCRIPTS --></body></html>

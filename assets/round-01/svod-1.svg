@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Свод — встречная арка">
+  <g fill="#262626">
+    <path d="M5 89V59C5 35 19 18 42 11L48 35C35 40 29 49 29 63V89Z"/>
+    <path d="M51 9C79 9 95 31 95 59V89H71V62C71 48 66 40 57 35Z"/>
+  </g>
+</svg>

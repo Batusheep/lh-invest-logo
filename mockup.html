@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f3f1">
+  <title>Логотип в интерфейсе · LH-Invest</title>
+  <!-- STYLES -->
+</head>
+<body>
+  <main class="workspace">
+    <header class="topline">
+      <a class="back" href="brand-review.html" aria-label="Назад к вариантам логотипа">← <span>Варианты логотипа</span></a>
+      <span class="eyebrow">ПРОВЕРКА В ИНТЕРФЕЙСЕ</span>
+    </header>
+    <section class="intro">
+      <div><p class="kicker">LH INVEST · ПЛАТФОРМА ИНВЕСТИЦИЙ</p><h1>Логотип в продукте</h1><p class="lede">Выберите знак, чтобы посмотреть его в боковой навигации кабинета.</p></div>
+      <div class="screen-switch" role="group" aria-label="Экран интерфейса">
+        <button type="button" data-screen="inv-overview" aria-pressed="true">Обзор</button>
+        <button type="button" data-screen="inv-catalog" aria-pressed="false">Инвестиции</button>
+        <button type="button" data-screen="inv-profile" aria-pressed="false">Профиль</button>
+      </div>
+    </section>
+    <section class="controls" aria-label="Параметры логотипа">
+      <div class="control-block variant-block">
+        <label class="control-label" for="variant-select">Вариант знака</label>
+        <div class="variant-pager" role="group" aria-label="Варианты логотипа">
+          <button type="button" data-step="-1" aria-label="Предыдущий вариант"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+          <select id="variant-select"></select>
+          <button type="button" data-step="1" aria-label="Следующий вариант"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <label class="text-control"><span class="control-label">Название</span><input id="brand-name" value="LH-Invest" maxlength="32"></label>
+      <label class="text-control sub-control"><span class="control-label">Подпись</span><input id="brand-sub" value="Инвестиционная платформа" maxlength="56"></label>
+      <div class="color-control"><span class="control-label">Цвет знака</span><div class="colors" role="group" aria-label="Цвет логотипа"></div></div>
+      <div class="zoom-control"><label class="control-label" for="zoom">Масштаб <output id="zoom-value">100%</output></label><div class="zoom-row"><button type="button" data-zoom="out" aria-label="Уменьшить масштаб">−</button><input id="zoom" type="range" min="55" max="115" value="100"><button type="button" data-zoom="in" aria-label="Увеличить масштаб">+</button><button type="button" id="fit">Вписать</button></div></div>
+    </section>
+    <section class="canvas" aria-label="Предпросмотр интерфейса">
+      <div class="canvas-hint"><span class="live-dot"></span>Интерактивный экран <span class="hint-separator">·</span> используйте прокрутку внутри, чтобы осмотреть страницу</div>
+      <div class="viewport"><div class="scaled-app"><iframe title="Интерфейс LH-Invest с выбранным логотипом"></iframe></div></div>
+    </section>
+    <footer><span>Макет интерфейса: 19.11.2026 · investor</span><span>Смена варианта обновляет знак в навигации</span></footer>
+  </main>
+  <!-- SCRIPTS -->
+</body>
+</html>
