@@ -124,6 +124,16 @@ const groups = [
     ["Объёмная М · цвет 2", "innesto/innesto-47", "innesto-study"],
     ["Ромб с переходами", "innesto/innesto-34", "innesto-study"],
     ["Квадрат с переходами", "innesto/innesto-35", "innesto-study"],
+    ["Пересечение модулей", "round-02/innesto/innesto-49", "innesto-intersection"],
+    ["Соединённые блоки", "round-02/innesto/innesto-50", "innesto-blocks"],
+    ["Кубическое кольцо", "round-02/innesto/innesto-52", "innesto-four-cubes"],
+    ["Куб из отдельных модулей", "round-02/innesto/innesto-53", "innesto-four-cubes"],
+    ["Скруглённый куб", "round-02/innesto/innesto-54", "innesto-four-cubes"],
+    ["Куб с тремя выступами", "round-02/innesto/innesto-55", "innesto-modular-forms"],
+    ["Арка и куб", "round-02/innesto/innesto-56", "innesto-modular-forms"],
+    ["Двойная объёмная М", "round-02/innesto/innesto-57", "innesto-modular-forms"],
+    ["Двойная М · синий и розовый", "round-02/innesto/innesto-58", "innesto-modular-forms"],
+    ["Двойная М · графит и оранжевый", "round-02/innesto/innesto-59", "innesto-modular-forms"],
   ]],
   ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"], ["Карамельная диаграмма", "round-02/karamel/karamel-2", "karamel-candy-chart"], ["Круглая карамельная диаграмма", "round-02/karamel/karamel-3", "karamel-candy-round"], ["Лента-леденец", "round-02/karamel/karamel-4", "karamel-candy-ribbon"]]],
   ["tessera", "Tessera", "#ECEBE5", []],
@@ -170,3 +180,9 @@ for (let i = 1; i <= 6; i++) {
   catalog.innesto.items.unshift({ key: 'quarter-' + i, label: 'Четверть круга · ' + i, file: 'new-marks/quarter-' + i + '-board.png', mark: 'new-marks/quarter-' + i + '.svg', background: '#ECEBE5', series: 'quarter-circle' })
 }
 catalog.innesto.items.unshift({ key: 'cube-reference-p', unassigned: true, label: 'Куб Р · 6 · 9', file: 'new-marks/cube-p-board.png', mark: 'new-marks/cube-p.svg', background: '#ECEBE5', series: 'cube-reference' })
+
+// Самостоятельные знаки F: сочетаются с названиями, содержащими F.
+catalog.innesto.items.push({ key: 'f-rounded-black', unassigned: true, markGroup: 'Знаки F', label: 'Мягкая F · чёрная', mark: 'round-02/f-marks/f-rounded-black.svg', file: 'round-02/f-marks/f-rounded-black-board.png', series: 'f-marks' })
+catalog.innesto.items.push({ key: 'f-rounded-color', unassigned: true, markGroup: 'Знаки F', label: 'Мягкая F · цветная', mark: 'round-02/f-marks/f-rounded-color.svg', file: 'round-02/f-marks/f-rounded-color-board.png', series: 'f-marks' })
+catalog.innesto.items.push({ key: 'f-block-black', unassigned: true, markGroup: 'Знаки F', label: 'Модульная F · чёрная', mark: 'round-02/f-marks/f-block-black.svg', file: 'round-02/f-marks/f-block-black-board.png', series: 'f-marks' })
+catalog.innesto.items.push({ key: 'f-block-color', unassigned: true, markGroup: 'Знаки F', label: 'Модульная F · цветная', mark: 'round-02/f-marks/f-block-color.svg', file: 'round-02/f-marks/f-block-color-board.png', series: 'f-marks' })

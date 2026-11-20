@@ -592,5 +592,89 @@
     "fontFamily": "RobotoLocal",
     "fontWeight": 600,
     "fontStretch": "100%"
+  },
+  "f-rounded-black": {
+    "textColor": "#202020",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "f-rounded-color": {
+    "textColor": "#FF4045",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "f-block-black": {
+    "textColor": "#202020",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "f-block-color": {
+    "textColor": "#FF4045",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-49": {
+    "textColor": "#092D43",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-50": {
+    "textColor": "#171717",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 700,
+    "fontStretch": "100%"
+  },
+  "innesto-52": {
+    "textColor": "#285BE5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-53": {
+    "textColor": "#E74335",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-54": {
+    "textColor": "#D92539",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-55": {
+    "textColor": "#292929",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-56": {
+    "textColor": "#292929",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-57": {
+    "textColor": "#383838",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-58": {
+    "textColor": "#073E4F",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-59": {
+    "textColor": "#171717",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
   }
 }

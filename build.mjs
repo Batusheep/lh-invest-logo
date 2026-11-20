@@ -28,12 +28,12 @@ const variants = await Promise.all(Object.entries(catalog).flatMap(([group, conc
     const brandSvg = neutral ? svg.replace(new RegExp(palette[0], 'gi'), ownColor) : svg
     const style = markStyles[item.key]
     if (!style) throw new Error('Missing mark style: ' + item.key)
-    return { id: item.key, group: item.unassigned ? 'Отдельные знаки' : concept.title, label: item.label, name: item.unassigned ? null : concept.title, unassigned: !!item.unassigned, ...style,
+    return { id: item.key, group: item.unassigned ? (item.markGroup || 'Отдельные знаки') : concept.title, label: item.label, name: item.unassigned ? null : concept.title, unassigned: !!item.unassigned, ...style,
       sub: 'Инвестиционная платформа', svg, palette, brandSvg, brandPalette, series: item.series }
   })))
 
 // Saved favorites refer to the index of a mark. Keep the first 57 slots stable.
-const seriesOrder = item => item.series === 'karamel-candy-ribbon' ? 12 : item.series === 'aptus-large-a' ? 11 : item.series === 'karamel-candy-round' ? 10 : item.series === 'karamel-candy-chart' ? 9 : item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
+const seriesOrder = item => item.series === 'innesto-modular-forms' ? 18 : item.series === 'innesto-four-cubes' ? 17 : item.series === 'innesto-blocks' ? 16 : item.series === 'innesto-intersection' ? 15 : item.series === 'f-marks' ? 14 : item.series === 'karamel-candy-ribbon' ? 12 : item.series === 'aptus-large-a' ? 11 : item.series === 'karamel-candy-round' ? 10 : item.series === 'karamel-candy-chart' ? 9 : item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
 variants.sort((a, b) => seriesOrder(a) - seriesOrder(b))
 
 const formats = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.avif': 'avif' }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+<title id="title">Innesto — Двойная объёмная М</title>
+<g stroke="#292929" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+  <path fill="#FFFFFF" d="M20 68 128 8 172 33 64 93Z"/>
+  <path fill="#FFFFFF" d="M64 93 172 33 172 56 84 105 84 201 64 190Z"/>
+  <path fill="#383838" d="M20 68 64 93 64 190 84 201 84 105 128 129 128 248 20 188Z"/>
+  <path fill="#FFFFFF" d="M84 105 192 44 236 68 128 129Z"/>
+  <path fill="#383838" d="M170 126 192 114 192 212 170 200Z"/>
+  <path fill="#FFFFFF" d="M128 129 236 68 236 188 192 212 192 114 170 126 170 224 128 248Z"/>
+</g></svg>
