@@ -19,8 +19,9 @@ const variants = await Promise.all(Object.entries(catalog).flatMap(([group, conc
   concept.items.filter(item => item.mark).map(async item => {
     const svg = await load('assets/' + item.mark)
     const palette = [...new Set(Array.from(svg.matchAll(/(?:fill|stop-color)="(#[\da-f]{6})"/gi), match => match[1]))]
+    if (!palette.length) palette.push(...new Set(Array.from(svg.matchAll(/stroke="(#[\da-f]{6})"/gi), match => match[1])))
     const neutral = palette.length === 1 && /^#(?:000000|242424|262626|1[0-9a-f]{5}|2[0-9a-f]{5})$/i.test(palette[0])
-    const groupColors = { modus: '#274C82', osnova: '#245E50', sostav: '#687F50', aptus: '#285B72', integrum: '#57418B', totum: '#705188', nodus: '#365B94', stratum: '#655D50', unio: '#846283', frame: '#245E50', core: '#B2583A', foundry: '#805B47', bridge: '#315D84', launch: '#CA5D35', stapel: '#315B7B', svod: '#346457', 'svod-lh': '#4F5382', innesto: '#245347' }
+    const groupColors = { modus: '#274C82', osnova: '#245E50', sostav: '#687F50', aptus: '#285B72', integrum: '#57418B', totum: '#705188', nodus: '#365B94', stratum: '#655D50', unio: '#846283', frame: '#245E50', core: '#B2583A', foundry: '#805B47', bridge: '#315D84', launch: '#CA5D35', stapel: '#315B7B', svod: '#346457', 'svod-lh': '#4F5382', karamel: '#a74836', innesto: '#245347' }
     const ownColor = groupColors[group] || '#315D84'
     const brandPalette = neutral ? [ownColor] : palette
     const brandSvg = neutral ? svg.replace(new RegExp(palette[0], 'gi'), ownColor) : svg
@@ -30,7 +31,7 @@ const variants = await Promise.all(Object.entries(catalog).flatMap(([group, conc
   })))
 
 // Saved favorites refer to the index of a mark. Keep the first 57 slots stable.
-const seriesOrder = item => item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
+const seriesOrder = item => item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
 variants.sort((a, b) => seriesOrder(a) - seriesOrder(b))
 
 const formats = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.avif': 'avif' }
@@ -45,7 +46,9 @@ async function embedMaterial({ file, ...material }) {
   }
   const format = formats[extension]
   if (!format) throw new Error('Unsupported raster format: ' + file)
-  const image = await readFile(relative('assets/' + file))
+  let image
+  try { image = await readFile(relative('assets/' + file)) }
+  catch (error) { if (error.code === 'ENOENT' && material.mark) return material; throw error }
   return { ...material, image: 'data:image/' + format + ';base64,' + image.toString('base64') }
 }
 const concepts = Object.fromEntries(await Promise.all(Object.entries(catalog).map(async ([id, concept]) => {

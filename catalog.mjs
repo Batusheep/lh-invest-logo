@@ -25,6 +25,7 @@ const groups = [
     ["Полосы и А", "round-02/aptus/aptus-5", "aptus-reference"],
     ["Узлы А", "round-02/aptus/aptus-6", "aptus-reference"],
     ["А в квадрате", "round-02/aptus/aptus-7", "aptus-reference"],
+    ["А в квадрате · инверсия", "round-02/aptus/aptus-8", "aptus-reference"],
   ]],
   ["integrum", "Integrum", "#E8E7EF", [
     ["Замкнутый пояс", "round-02/integrum/integrum-1-color"],
@@ -123,8 +124,16 @@ const groups = [
     ["Ромб с переходами", "innesto/innesto-34", "innesto-study"],
     ["Квадрат с переходами", "innesto/innesto-35", "innesto-study"],
   ]],
+  ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"]]],
   ["tessera", "Tessera", "#ECEBE5", []],
   ["launvest", "Launvest", "#ECEBE5", []],
+  ["investomika", "Инвестомика", "#ECEBE5", []],
+  ["investport", "Инвестпорт", "#ECEBE5", []],
+  ["investobridge", "Инвестобридж", "#ECEBE5", []],
+  ["stackfin", "StackFin", "#ECEBE5", []],
+  ["plugfin", "PlugFin", "#ECEBE5", []],
+  ["nodeinvest", "NodeInvest", "#ECEBE5", []],
+  ["investmesh", "InvestMesh", "#ECEBE5", []],
 ]
 
 const spellings = {
@@ -135,7 +144,14 @@ const spellings = {
   bridge: ['Бридж', 'Bridge'], launch: ['Лонч', 'Launch'],
   stapel: ['Стапель', 'Stapel'], svod: ['Свод', 'Svod'],
   kilson: ['Кильсон', 'Kilson'], incastro: ['Инкастро', 'Incastro'], bastidor: ['Бастидор', 'Bastidor'],
-  innesto: ['Иннесто', 'Innesto'], tessera: ['Тессера', 'Tessera'], launvest: ['Лонвест', 'Launvest'],
+  investomika: ['Инвестомика', 'Investomika'],
+  investport: ['Инвестпорт', 'Investport'],
+  investobridge: ['Инвестобридж', 'Investobridge'],
+  stackfin: ['Стэкфин', 'StackFin'],
+  plugfin: ['Плагфин', 'PlugFin'],
+  nodeinvest: ['Нодинвест', 'NodeInvest'],
+  investmesh: ['Инвестмеш', 'InvestMesh'],
+  karamel: ['Карамель', 'Karamel'], innesto: ['Иннесто', 'Innesto'], tessera: ['Тессера', 'Tessera'], launvest: ['Лонвест', 'Launvest'],
 }
 
 export const catalog = Object.fromEntries(groups.map(([id, title, color, designs]) => [
