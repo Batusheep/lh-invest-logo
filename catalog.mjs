@@ -26,6 +26,7 @@ const groups = [
     ["Замкнутый пояс", "round-02/integrum/integrum-1-color"],
     ["Интеграл", "round-02/integrum/integrum-2"],
     ["Общий корешок", "round-02/integrum/integrum-3"],
+    ["Диаграмма со срезом", "new-marks/integrum-flat", "flat-chart"],
   ]],
   ["totum", "Totum", "#F0E8DF", [
     ["Полный оборот", "round-02/totum/totum-1"],
@@ -99,7 +100,35 @@ const groups = [
   ["kilson", "Кильсон", "#ECEBE5", []],
   ["incastro", "Incastro", "#ECEBE5", []],
   ["bastidor", "Bastidor", "#ECEBE5", []],
-  ["innesto", "Innesto", "#ECEBE5", []],
+  ["innesto", "Innesto", "#ECEBE5", [
+    ["Точка сборки", "innesto/innesto-1", "innesto-study"],
+    ["Вход в систему", "innesto/innesto-2", "innesto-study"],
+    ["Боковой слот", "innesto/innesto-3", "innesto-study"],
+    ["Верхний слот", "innesto/innesto-4", "innesto-study"],
+    ["Модуль на стыке", "innesto/innesto-5", "innesto-study"],
+    ["Скруглённое гнездо", "innesto/innesto-6", "innesto-study"],
+    ["Клавиша Enter", "innesto/innesto-7", "innesto-study"],
+    ["Вертикальный замок", "innesto/innesto-8", "innesto-study"],
+    ["Замок вверх", "innesto/innesto-9", "innesto-study"],
+    ["Замок вниз", "innesto/innesto-10", "innesto-study"],
+    ["Прямой шип", "innesto/innesto-11", "innesto-study"],
+    ["Монета в прорези", "innesto/innesto-12", "innesto-study"],
+    ["Открытая копилка", "innesto/innesto-13", "innesto-study"],
+    ["Коробка и монета", "innesto/innesto-14", "innesto-study"],
+    ["Капсула и монета", "innesto/innesto-15", "innesto-study"],
+    ["Модульная сетка", "innesto/innesto-16", "innesto-study"],
+    ["Сетка с опорой", "innesto/innesto-17", "innesto-study"],
+    ["Собранная сетка", "innesto/innesto-18", "innesto-study"],
+    ["Три детали", "innesto/innesto-19", "innesto-study"],
+    ["Диагональные модули", "innesto/innesto-20", "innesto-study"],
+    ["Диагональная сборка", "innesto/innesto-21", "innesto-study"],
+    ["Гнездо в кубе · цвет 1", "innesto/innesto-38", "innesto-study"],
+    ["Гнездо в кубе · цвет 2", "innesto/innesto-39", "innesto-study"],
+    ["Объёмная М · цвет 1", "innesto/innesto-46", "innesto-study"],
+    ["Объёмная М · цвет 2", "innesto/innesto-47", "innesto-study"],
+    ["Ромб с переходами", "innesto/innesto-34", "innesto-study"],
+    ["Квадрат с переходами", "innesto/innesto-35", "innesto-study"],
+  ]],
   ["tessera", "Tessera", "#ECEBE5", []],
   ["launvest", "Launvest", "#ECEBE5", []],
 ]
@@ -118,10 +147,15 @@ const spellings = {
 export const catalog = Object.fromEntries(groups.map(([id, title, color, designs]) => [
   id, { title, spellings: { ru: spellings[id][0], latin: spellings[id][1] }, color, items: [
     ...designs.map(([label, stem, series], index) => ({
-      key: id + '-' + (index + 1), label, file: stem + '-board.png',
+      key: id + '-' + (id === 'innesto' ? Number(stem.split('-').at(-1)) : index + 1), label, file: stem + '-board.png',
       mark: stem + '.svg', background: color, series,
     })),
     { key: 'description', label: 'Идея названия и логотипов · ' + title,
       file: 'round-02/' + id + '.md', background: '#faf8f5' },
   ] },
 ]))
+
+for (let i = 1; i <= 6; i++) {
+  catalog.innesto.items.unshift({ key: 'quarter-' + i, label: 'Четверть круга · ' + i, file: 'new-marks/quarter-' + i + '-board.png', mark: 'new-marks/quarter-' + i + '.svg', background: '#ECEBE5', series: 'quarter-circle' })
+}
+catalog.innesto.items.unshift({ key: 'cube-reference-p', label: 'Куб Р · 6 · 9', file: 'new-marks/cube-p-board.png', mark: 'new-marks/cube-p.svg', background: '#ECEBE5', series: 'cube-reference' })

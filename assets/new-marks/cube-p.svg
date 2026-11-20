@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">Куб — Р, 6 или 9</title>
+  <g fill="#242424" stroke="#242424" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path fill="none" d="M128 25 222 79V183L128 237 34 183V79Z M222 79 128 133 68 98V203 M128 133V237 M128 56 167 78 128 100 89 78Z"/>
+  </g>
+</svg>

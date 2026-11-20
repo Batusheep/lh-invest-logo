@@ -1,5 +1,6 @@
 const variants = mockupData.variants
 const colors = [
+  { id: 'black', label: 'Чёрный', value: '#242424' },
   { id: 'white', label: 'Белый', value: '#FFFFFF' },
   { id: 'blue', label: 'Светло-синий', value: '#B8D1FF' },
   { id: 'mint', label: 'Мятный', value: '#C9E4D6' },
@@ -14,12 +15,12 @@ const nameInput = document.querySelector('#brand-name')
 const subInput = document.querySelector('#brand-sub')
 const variantSelect = document.querySelector('#variant-select')
 const requestedId = location.hash.slice(1).replace(/^verf-([123])$/, (_, n) => 'stapel-' + (Number(n) + 3))
-let activeVariant = variants.find(option => option.id === requestedId)?.id ?? variants[0].id
+let activeVariant = variants.find(option => option.id === requestedId)?.id ?? variants.find(option => option.id === 'innesto-1')?.id ?? variants[0].id
 let activeColor = 'brand'
 let activeScreen = 'inv-overview'
 let fitScale = 1
 
-for (const name of new Set(variants.map(option => option.group))) {
+for (const name of [...new Set(variants.map(option => option.group))].sort((a,b) => Number(b === 'Innesto') - Number(a === 'Innesto'))) {
   const group = document.createElement('optgroup')
   group.label = name
   for (const variant of variants.filter(option => option.group === name)) {
@@ -40,59 +41,24 @@ function selectVariant(id) {
 function logoData(variantId = activeVariant) {
   const variant = variants.find(option => option.id === variantId)
   const ink = colors.find(color => color.id === activeColor)?.value ?? '#FFFFFF'
-  const svg = activeColor === 'brand' && variant.palette.length > 1
-    ? variant.svg : variant.svg.replace(/fill="#[\da-f]{6}"/gi, 'fill="' + ink + '"')
+  let svg = activeColor === 'brand' ? variant.brandSvg : variant.svg
+  if (activeColor !== 'brand') variant.palette.forEach(color => { svg = svg.replace(new RegExp(color, 'gi'), ink) })
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg)
 }
 
 function renderColors() {
-  const palette = variants.find(option => option.id === activeVariant).palette
-  const choices = palette.length > 1
-    ? [{ id: 'brand', label: 'Цвета логотипа', value: 'linear-gradient(125deg,' + palette.join(',') + ')' }, ...colors]
-    : colors
-  const shown = activeColor === 'brand' && palette.length === 1 ? 'white' : activeColor
+  const palette = variants.find(option => option.id === activeVariant).brandPalette
+  const choices = [{ id: 'brand', label: 'Цвет логотипа', value: palette.length > 1 ? 'linear-gradient(125deg,' + palette.join(',') + ')' : palette[0] }, ...colors]
+  const shown = activeColor
   document.querySelector('.colors').innerHTML = choices.map(color =>
     `<button class="color-swatch" type="button" data-color="${color.id}" aria-label="${color.label}" title="${color.label}" aria-pressed="${color.id === shown}" style="--swatch:${color.value}"></button>`
   ).join('')
 }
 
-function appDocument() {
-  let source = mockupData.interfaceSource
-  source = source.replace("|| 'auth-register', false, false)", "|| 'inv-overview', false, false)")
-  source = source.replace('</head>', `<style>.demobar{display:none!important}:root{--demo-h:0px!important}html,body{scrollbar-gutter:stable}.side .brand-mark img{width:22px;height:22px;object-fit:contain}</style></head>`)
-  const bridge = `<script>
-    let logoState = null;
-    function applyLogoState() {
-      if (!logoState) return;
-      const mark = document.querySelector('.side .brand-mark');
-      const name = document.querySelector('.side .brand-name');
-      const sub = document.querySelector('.side .brand-sub');
-      if (mark) {
-        mark.style.background = logoState.brandColor ? '#ffffff' : '';
-        const image = mark.querySelector('img');
-        if (!image || image.getAttribute('src') !== logoState.logo) mark.innerHTML = '<img alt="" src="' + logoState.logo + '">';
-        mark.dataset.shape = 'square';
-      }
-      if (name && name.textContent !== logoState.name) name.textContent = logoState.name;
-      if (sub && sub.textContent !== logoState.sub) sub.textContent = logoState.sub;
-    }
-    window.addEventListener('message', function(event) {
-      const data = event.data;
-      if (!data) return;
-      if (data.type === 'navigate') { location.hash = data.screen; return; }
-      if (data.type !== 'logo-mockup') return;
-      logoState = data;
-      applyLogoState();
-    });
-    const appRoot = document.getElementById('app');
-    if (appRoot) new MutationObserver(applyLogoState).observe(appRoot, { childList: true, subtree: true });
-  <\/script>`
-  return source.replace('</body>', bridge + '</body>')
-}
 
 function syncBrand() {
   frame.contentWindow?.postMessage({
-    type: 'logo-mockup', logo: logoData(), brandColor: activeColor === 'brand' && variants.find(v => v.id === activeVariant).palette.length > 1,
+    type: 'logo-mockup', logo: logoData(), brandColor: activeColor === 'brand',
     name: nameInput.value, sub: subInput.value,
   }, '*')
 }
@@ -123,7 +89,7 @@ function setScreen(screen) {
 }
 
 selectVariant(activeVariant)
-frame.srcdoc = appDocument()
+frame.srcdoc = productDocument(mockupData.interfaceSource)
 frame.addEventListener('load', () => {
   setScreen(activeScreen)
   syncBrand()

@@ -14,16 +14,23 @@ const mockupShell = await load('mockup.html')
 const mockupStyles = await load('mockup.css')
 const mockupScript = await load('mockup.js')
 const interfaceSource = await load('prototype/lh-invest-interface.html')
+const productDocument = await load('product-document.js')
 const variants = await Promise.all(Object.entries(catalog).flatMap(([group, concept]) =>
   concept.items.filter(item => item.mark).map(async item => {
     const svg = await load('assets/' + item.mark)
-    const palette = [...new Set(Array.from(svg.matchAll(/fill="(#[\da-f]{6})"/gi), match => match[1]))]
+    const palette = [...new Set(Array.from(svg.matchAll(/(?:fill|stop-color)="(#[\da-f]{6})"/gi), match => match[1]))]
+    const neutral = palette.length === 1 && /^#(?:000000|242424|262626|1[0-9a-f]{5}|2[0-9a-f]{5})$/i.test(palette[0])
+    const groupColors = { modus: '#274C82', osnova: '#245E50', sostav: '#687F50', aptus: '#285B72', integrum: '#57418B', totum: '#705188', nodus: '#365B94', stratum: '#655D50', unio: '#846283', frame: '#245E50', core: '#B2583A', foundry: '#805B47', bridge: '#315D84', launch: '#CA5D35', vertex: '#514C82', stapel: '#315B7B', svod: '#346457', 'svod-lh': '#4F5382', innesto: '#245347' }
+    const ownColor = groupColors[group] || '#315D84'
+    const brandPalette = neutral ? [ownColor] : palette
+    const brandSvg = neutral ? svg.replace(new RegExp(palette[0], 'gi'), ownColor) : svg
     return { id: item.key, group: concept.title, label: item.label, name: concept.title,
-      sub: 'Инвестиционная платформа', svg, palette, series: item.series }
+      sub: 'Инвестиционная платформа', svg, palette, brandSvg, brandPalette, series: item.series }
   })))
 
 // Saved favorites refer to the index of a mark. Keep the first 57 slots stable.
-variants.sort((a, b) => Number(a.series === 'box-study') - Number(b.series === 'box-study'))
+const seriesOrder = item => item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
+variants.sort((a, b) => seriesOrder(a) - seriesOrder(b))
 
 const formats = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.avif': 'avif' }
 const run = promisify(execFile)
@@ -60,26 +67,31 @@ const shortlistNames = shortlist.split(/\r?\n/).filter(line => /^\|\s*\d+\s*\|/.
   }
   return title
 })
+shortlistNames.sort((a, b) => Number(b === 'Innesto') - Number(a === 'Innesto'))
 const data = JSON.stringify(concepts).replaceAll('<', '\\u003c')
 const studioVariants = JSON.stringify(variants).replaceAll('<', '\\u003c')
 const font = await readFile(relative('../frontend/assets/fonts/Roboto-Variable.ttf'))
 const [newShell, newStyles, newScript] = await Promise.all(['new-shell.html', 'new-studio.css', 'new-studio.js'].map(load))
 const result = newShell
   .replace('<!-- STYLES -->', () => '<style>@font-face{font-family:RobotoLocal;src:url(data:font/ttf;base64,' + font.toString('base64') + ');font-weight:100 900;font-stretch:75% 100%}\n' + newStyles + '\n</style>')
-  .replace('<!-- SCRIPTS -->', () => '<script>' + morphicons + '\nconst variants = ' + studioVariants + ';\nconst concepts = ' + data + ';\nconst shortlistNames = ' + JSON.stringify(shortlistNames).replaceAll('<', '\\u003c') + ';\n' + newScript + '\n' + motion.replace("if (control.id) return", "if (control.dataset.act && control.querySelector('svg')) return '[data-act=\"' + CSS.escape(control.dataset.act) + '\"]';\n    if (control.id) return") + '\n</script>')
+  .replace('<!-- SCRIPTS -->', () => '<script>' + morphicons + '\nconst variants = ' + studioVariants + ';\nconst concepts = ' + data + ';\nconst productInterface = ' + JSON.stringify(interfaceSource).replaceAll('<', '\\u003c') + ';\n' + productDocument + '\nconst shortlistNames = ' + JSON.stringify(shortlistNames).replaceAll('<', '\\u003c') + ';\n' + newScript + '\n;\n' + motion.replace("if (control.id) return", "if (control.dataset.act && control.querySelector('svg')) return '[data-act=\"' + CSS.escape(control.dataset.act) + '\"]';\n    if (control.id) return") + '\n</script>')
 
 await writeFile(relative('brand-review.html'), result, 'utf8')
 
-const presentationData = JSON.stringify(Object.fromEntries(Object.entries(concepts).filter(([, c]) => shortlistNames.includes(c.title) && c.items.some(item => item.image)))).replaceAll('<', '\\u003c')
-const presentation = shell
-  .replace('<!-- STYLES -->', () => '<style>@font-face{font-family:RobotoLocal;src:url(data:font/ttf;base64,' + font.toString('base64') + ');font-weight:100 900;font-stretch:75% 100%}\n' + styles + '</style>')
-  .replace('<!-- SCRIPTS -->', () => '<script>' + morphicons + '\nconst concepts = ' + presentationData + ';\nconst studioVariants = ' + studioVariants + ';\n' + script + '\n' + motion + '</script>')
+const presentationEntries = Object.entries(concepts).filter(([, c]) => shortlistNames.includes(c.title) && c.items.some(item => item.image))
+presentationEntries.sort((a, b) => Number(b[1].title === 'Innesto') - Number(a[1].title === 'Innesto'))
+const presentationData = JSON.stringify(Object.fromEntries(presentationEntries)).replaceAll('<', '\\u003c')
+const [presentationShell, presentationStyles, presentationScript, presentationMotion] = await Promise.all(
+  ['presentation-shell.html', 'presentation.css', 'presentation.js', 'presentation-motion.js'].map(load))
+const presentation = presentationShell
+  .replace('<!-- STYLES -->', () => '<style>\n' + presentationStyles + '\n</style>')
+  .replace('<!-- SCRIPTS -->', () => '<script>\n' + morphicons + '\nconst baseConcepts = ' + presentationData + ';\n' + presentationScript + '\n;\n' + presentationMotion + '\n</script>')
 await writeFile(relative('presentation.html'), presentation, 'utf8')
 
 const mockupData = JSON.stringify({ interfaceSource, variants }).replaceAll('<', '\\u003c')
 const mockup = mockupShell
   .replace('<!-- STYLES -->', () => '<style>\n' + mockupStyles + '\n</style>')
-  .replace('<!-- SCRIPTS -->', () => '<script>\nconst mockupData = ' + mockupData + ';\n' + mockupScript + '\n</script>')
+  .replace('<!-- SCRIPTS -->', () => '<script>\nconst mockupData = ' + mockupData + ';\n' + productDocument + '\n' + mockupScript + '\n</script>')
 await writeFile(relative('logo-mockup.html'), mockup, 'utf8')
 
 const constructorShell = await load('constructor.html')

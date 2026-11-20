@@ -27,6 +27,9 @@
   display: grid; place-items: center; width: 45px; height: 45px; padding: 0;
 }
 .arrow-group svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.arrow-group button.language-toggle { min-width: 46px; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.mock-product { height: 280px; min-width: 0; overflow: hidden; border-radius: 14px; background: #eaf0f7; }
+.mock-product iframe { display: block; width: 1440px; height: 900px; border: 0; pointer-events: none; }
 .panel-actions { grid-template-columns: 1fr; }
 .panel-actions button { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; }
 .panel-actions svg,.icon-action svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; flex:none; }
