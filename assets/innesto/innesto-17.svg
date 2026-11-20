@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>Innesto — Сетка с опорой</title><path fill="#F15831" d="M192 24H234V66H192ZM192 150H234V234H192Z"/><path fill="#F6CA05" d="M24 150H192V234H24Z"/><path fill="#377AA5" d="M66 66H192V150H66Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><g transform="translate(24 24) scale(0.84) translate(-473 -90)"><rect xmlns="http://www.w3.org/2000/svg" x="673" y="240" width="50" height="100" fill="#F15831" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="473" y="240" width="200" height="100" fill="#F6CA05" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="673" y="190" width="50" height="50" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="523" y="140" width="150" height="100" fill="#377AA5" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="473" y="90" width="50" height="150" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M673 140H723V190H673V140Z" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="673" y="90" width="50" height="50" fill="#F15831" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M523 90H673V140H523V90Z" fill="#E6DFCD" stroke-width="2" stroke="black" />
+</g></svg>

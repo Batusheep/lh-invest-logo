@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>Innesto — Три детали</title><path fill="#F15831" d="M24 24H94V164H24Z"/><path fill="#F6CA05" d="M94 24H234V164H164V94H94Z"/><path fill="#377AA5" d="M94 94H164V234H24V164H94Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><g transform="translate(24 24) scale(1.4) translate(-124 -383)"><rect xmlns="http://www.w3.org/2000/svg" x="224" y="483" width="50" height="50" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M174 433L224 433L224 533L124 533L124 483L174 483L174 433Z" fill="#377AA5" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M174 433L174 383L274 383L274 483L224 483L224 433L174 433Z" fill="#F6CA05" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="124" y="383" width="50" height="100" fill="#F15831" stroke-width="2" stroke="black" />
+</g></svg>

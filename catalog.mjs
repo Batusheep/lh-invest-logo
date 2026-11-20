@@ -21,6 +21,10 @@ const groups = [
     ["Калибр", "round-02/aptus/aptus-1"],
     ["Косой стык", "round-02/aptus/aptus-2-color"],
     ["Лекало", "round-02/aptus/aptus-3"],
+    ["Модульная рамка", "round-02/aptus/aptus-4", "aptus-reference"],
+    ["Полосы и А", "round-02/aptus/aptus-5", "aptus-reference"],
+    ["Узлы А", "round-02/aptus/aptus-6", "aptus-reference"],
+    ["А в квадрате", "round-02/aptus/aptus-7", "aptus-reference"],
   ]],
   ["integrum", "Integrum", "#E8E7EF", [
     ["Замкнутый пояс", "round-02/integrum/integrum-1-color"],
@@ -74,11 +78,6 @@ const groups = [
     ["Спусковая L", "round-02/launch/launch-2"],
     ["Выход на орбиту", "round-02/launch/launch-3"],
   ]],
-  ["vertex", "Vertex", "#E8E7E4", [
-    ["Одна вершина", "round-02/vertex/vertex-1"],
-    ["Точка V", "round-02/vertex/vertex-2-color"],
-    ["Изолиния", "round-02/vertex/vertex-3"],
-  ]],
   ["stapel", "Стапель", "#ECE9E2", [
     ["Киль в ложементе", "round-02/stapel/stapel-1-color"],
     ["Поперечный набор", "round-02/stapel/stapel-2"],
@@ -91,11 +90,6 @@ const groups = [
     ["Встречная арка", "round-01/svod-1"],
     ["Замок кладки", "round-02/svod/svod-2-color"],
     ["Свод листов", "round-02/svod/svod-3"],
-  ]],
-  ["svod-lh", "Свод LH", "#E4E8EA", [
-    ["С с замковым камнем", "round-01/svod-2"],
-    ["Портал с перемычкой", "round-02/svod-lh/svod-lh-2"],
-    ["Сигнатура в углу", "round-02/svod-lh/svod-lh-3-color"],
   ]],
   ["kilson", "Кильсон", "#ECEBE5", []],
   ["incastro", "Incastro", "#ECEBE5", []],
@@ -138,8 +132,8 @@ const spellings = {
   aptus: ['Аптус', 'Aptus'], integrum: ['Интегрум', 'Integrum'], totum: ['Тотум', 'Totum'],
   nodus: ['Нодус', 'Nodus'], stratum: ['Стратум', 'Stratum'], unio: ['Унио', 'Unio'],
   frame: ['Фрейм', 'Frame'], core: ['Кор', 'Core'], foundry: ['Фаундри', 'Foundry'],
-  bridge: ['Бридж', 'Bridge'], launch: ['Лонч', 'Launch'], vertex: ['Вертекс', 'Vertex'],
-  stapel: ['Стапель', 'Stapel'], svod: ['Свод', 'Svod'], 'svod-lh': ['Свод ЛХ', 'Svod LH'],
+  bridge: ['Бридж', 'Bridge'], launch: ['Лонч', 'Launch'],
+  stapel: ['Стапель', 'Stapel'], svod: ['Свод', 'Svod'],
   kilson: ['Кильсон', 'Kilson'], incastro: ['Инкастро', 'Incastro'], bastidor: ['Бастидор', 'Bastidor'],
   innesto: ['Иннесто', 'Innesto'], tessera: ['Тессера', 'Tessera'], launvest: ['Лонвест', 'Launvest'],
 }

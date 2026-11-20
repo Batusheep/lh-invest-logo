@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>Innesto — Собранная сетка</title><path fill="#F15831" d="M24 24H66V150H24ZM192 24H234V66H192ZM192 150H234V234H192Z"/><path fill="#F6CA05" d="M66 24H192V66H66ZM192 66H234V108H192ZM24 150H192V234H24Z"/><path fill="#377AA5" d="M66 66H192V150H66Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><g transform="translate(24 24) scale(0.84) translate(-818 -90)"><rect xmlns="http://www.w3.org/2000/svg" x="1018" y="240" width="50" height="100" fill="#F15831" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="818" y="240" width="200" height="100" fill="#F6CA05" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="1018" y="190" width="50" height="50" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="868" y="140" width="150" height="100" fill="#377AA5" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M818 90L868 90L868 240L818 240L818 90Z" fill="#F15831" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M1018 140L1068 140L1068 190L1018 190L1018 140Z" fill="#F6CA05" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="1018" y="90" width="50" height="50" fill="#F15831" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M868 90L1018 90L1018 140L868 140L868 90Z" fill="#F6CA05" stroke-width="2" stroke="black" />
+</g></svg>

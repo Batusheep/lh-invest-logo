@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>Innesto — Модульная сетка</title><path fill="#F15831" d="M24 24H66V108H24ZM24 192H66V234H24Z"/><path fill="#F6CA05" d="M66 24H234V108H66Z"/><path fill="#377AA5" d="M66 108H192V192H66Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><g transform="translate(24 24) scale(0.84) translate(-124 -90)"><rect xmlns="http://www.w3.org/2000/svg" x="124" y="90" width="50" height="100" fill="#F15831" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="174" y="90" width="200" height="100" fill="#F6CA05" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="124" y="190" width="50" height="50" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="174" y="190" width="150" height="100" fill="#377AA5" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="324" y="190" width="50" height="150" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M174 290H124V240H174V290Z" fill="#E6DFCD" stroke-width="2" stroke="black" />
+<rect xmlns="http://www.w3.org/2000/svg" x="124" y="290" width="50" height="50" fill="#F15831" stroke-width="2" stroke="black" />
+<path xmlns="http://www.w3.org/2000/svg" d="M324 340H174V290H324V340Z" fill="#E6DFCD" stroke-width="2" stroke="black" />
+</g></svg>

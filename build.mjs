@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, writeFile, access } from 'node:fs/promises'
 import { execFile } from 'node:child_process'
 import { extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -20,16 +20,17 @@ const variants = await Promise.all(Object.entries(catalog).flatMap(([group, conc
     const svg = await load('assets/' + item.mark)
     const palette = [...new Set(Array.from(svg.matchAll(/(?:fill|stop-color)="(#[\da-f]{6})"/gi), match => match[1]))]
     const neutral = palette.length === 1 && /^#(?:000000|242424|262626|1[0-9a-f]{5}|2[0-9a-f]{5})$/i.test(palette[0])
-    const groupColors = { modus: '#274C82', osnova: '#245E50', sostav: '#687F50', aptus: '#285B72', integrum: '#57418B', totum: '#705188', nodus: '#365B94', stratum: '#655D50', unio: '#846283', frame: '#245E50', core: '#B2583A', foundry: '#805B47', bridge: '#315D84', launch: '#CA5D35', vertex: '#514C82', stapel: '#315B7B', svod: '#346457', 'svod-lh': '#4F5382', innesto: '#245347' }
+    const groupColors = { modus: '#274C82', osnova: '#245E50', sostav: '#687F50', aptus: '#285B72', integrum: '#57418B', totum: '#705188', nodus: '#365B94', stratum: '#655D50', unio: '#846283', frame: '#245E50', core: '#B2583A', foundry: '#805B47', bridge: '#315D84', launch: '#CA5D35', stapel: '#315B7B', svod: '#346457', 'svod-lh': '#4F5382', innesto: '#245347' }
     const ownColor = groupColors[group] || '#315D84'
     const brandPalette = neutral ? [ownColor] : palette
     const brandSvg = neutral ? svg.replace(new RegExp(palette[0], 'gi'), ownColor) : svg
-    return { id: item.key, group: concept.title, label: item.label, name: concept.title,
+    const textColor = neutral ? '#262626' : (group === 'innesto' ? '#294b62' : ownColor)
+    return { id: item.key, group: concept.title, label: item.label, name: concept.title, textColor,
       sub: 'Инвестиционная платформа', svg, palette, brandSvg, brandPalette, series: item.series }
   })))
 
 // Saved favorites refer to the index of a mark. Keep the first 57 slots stable.
-const seriesOrder = item => item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
+const seriesOrder = item => item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
 variants.sort((a, b) => seriesOrder(a) - seriesOrder(b))
 
 const formats = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.avif': 'avif' }
@@ -47,8 +48,14 @@ async function embedMaterial({ file, ...material }) {
   const image = await readFile(relative('assets/' + file))
   return { ...material, image: 'data:image/' + format + ';base64,' + image.toString('base64') }
 }
-const concepts = Object.fromEntries(await Promise.all(Object.entries(catalog).map(async ([id, concept]) =>
-  [id, { ...concept, items: await Promise.all(concept.items.map(embedMaterial)) }])))
+const concepts = Object.fromEntries(await Promise.all(Object.entries(catalog).map(async ([id, concept]) => {
+  const available = await Promise.all(concept.items.map(async item => {
+    if (!item.file.endsWith('.md')) return true
+    try { await access(relative('descriptions/' + item.file)); return true }
+    catch { console.warn('Missing description:', item.file); return false }
+  }))
+  return [id, { ...concept, items: await Promise.all(concept.items.filter((_, index) => available[index]).map(embedMaterial)) }]
+})))
 const shortlist = await load('NAMING-SHORTLIST.md')
 const shortlistNames = shortlist.split(/\r?\n/).filter(line => /^\|\s*\d+\s*\|/.test(line)).map(line => {
   const columns = line.split('|').slice(1, -1).map(value => value.trim())

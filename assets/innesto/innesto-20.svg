@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>Innesto — Диагональные модули</title><path fill="#377AA5" d="M24 24H45L151 130 24 202Z"/><path fill="#F15831" d="M45 24H232L110 95Z"/><path fill="#F6CA05" d="M24 232V202L151 130 232 84V232Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs><clipPath id="clip"><rect x="24" y="24" width="208" height="208"/></clipPath></defs><g clip-path="url(#clip)"><g transform="translate(24 24) scale(1.04) translate(-349 -383)">
+<path d="M583.261 365.044L293.632 532.261L126.415 242.632L416.044 75.4151L583.261 365.044Z" fill="#F25932" stroke-width="5" stroke="black"/>
+<path d="M242.088 255.536L488.641 502.088L242.088 748.641L-4.46448 502.088L242.088 255.536Z" fill="#377AA5" stroke-width="5" stroke="black"/>
+<path d="M751.718 754.379L449.754 928.718L275.415 626.754L577.379 452.415L751.718 754.379Z" fill="#F6CA05" stroke-width="5" stroke="black"/>
+
+</g></g><rect x="24" y="24" width="208" height="208" fill="none" stroke="black" stroke-width="5.2"/></svg>

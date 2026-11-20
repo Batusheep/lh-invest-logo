@@ -38,6 +38,7 @@ function original() { return mark().palette.length ? mark().palette : ['#262626'
 function setMark(index) {
   const previousColors = state.colors
   state.mark = (index + data.variants.length) % data.variants.length
+  if (state.palette === 'original') state.text = mark().textColor || '#262626'
   state.colors = state.palette === 'original' || !previousColors.length
     ? [...original()]
     : original().map((_, i) => previousColors[i % previousColors.length])
@@ -76,7 +77,7 @@ function render() {
   original().forEach((color, index) => { svg = svg.replace(new RegExp(color, 'gi'), state.colors[index]) })
   document.querySelector('#mark').innerHTML = svg
   const palettes = [
-    {id:'original', label:'Исходные цвета знака', colors:original(), text:'#262626'},
+    {id:'original', label:'Исходные цвета знака', colors:original(), text:v.textColor || '#262626'},
     {id:'ink', label:'Графит', colors:['#262626'], text:'#262626'},
     {id:'blue', label:'Синий', colors:['#28528a'], text:'#28528a'},
     {id:'forest', label:'Зелёный и терракота', colors:['#245e50','#c15e3b'], text:'#245e50'},
@@ -127,4 +128,4 @@ for(const preset of presets.filter(preset => data.names.some(name => name.title 
   button.addEventListener('click',()=>{state.name=data.names.findIndex(name=>name.title===preset.name);state.custom='';state.text='#262626';state.palette='original';setMark(data.variants.findIndex(v=>v.id===preset.mark));document.querySelector('.workspace').scrollIntoView({behavior:'smooth',block:'start'})})
   presetBox.append(button)
 }
-render()
+setMark(0)
