@@ -1,7 +1,7 @@
 function productDocument(interfaceSource) {
   let source = interfaceSource
   source = source.replace("|| 'auth-register', false, false)", "|| 'inv-overview', false, false)")
-  source = source.replace('</head>', `<style>.demobar{display:none!important}:root{--demo-h:0px!important}html,body{scrollbar-gutter:stable}.side .brand-mark img{width:22px;height:22px;object-fit:contain}</style></head>`)
+  source = source.replace('</head>', `<style>.demobar{display:none!important}:root{--demo-h:0px!important}html,body{scrollbar-gutter:stable}.side .brand{visibility:hidden}.side .brand:has(.brand-mark[data-logo-ready]){visibility:visible}.side .brand-mark img{width:32px;height:32px;object-fit:contain}</style></head>`)
   const bridge = `\x3cscript>
     let logoState = null;
     function applyLogoState() {
@@ -10,13 +10,14 @@ function productDocument(interfaceSource) {
       const name = document.querySelector('.side .brand-name');
       const sub = document.querySelector('.side .brand-sub');
       if (mark) {
-        mark.style.background = logoState.brandColor ? '#ffffff' : '';
+        mark.style.background = logoState.transparentMark ? 'transparent' : (logoState.brandColor ? '#ffffff' : '');
         const image = mark.querySelector('img');
         if (!image || image.getAttribute('src') !== logoState.logo) mark.innerHTML = '<img alt="" src="' + logoState.logo + '">';
         mark.dataset.shape = 'square';
       }
       if (name && name.textContent !== logoState.name) name.textContent = logoState.name;
       if (sub && sub.textContent !== logoState.sub) sub.textContent = logoState.sub;
+      if (mark) mark.dataset.logoReady = 'true';
     }
     window.addEventListener('message', function(event) {
       const data = event.data;

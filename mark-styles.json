@@ -1,0 +1,584 @@
+{
+  "modus-1": {
+    "textColor": "#274C82",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "modus-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "modus-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "osnova-1": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "osnova-2": {
+    "textColor": "#27584C",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "osnova-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "sostav-1": {
+    "textColor": "#265951",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "sostav-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "sostav-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "aptus-1": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "aptus-2": {
+    "textColor": "#38458A",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "aptus-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "integrum-1": {
+    "textColor": "#503589",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "integrum-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "integrum-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "totum-1": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "totum-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "totum-3": {
+    "textColor": "#743452",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "nodus-1": {
+    "textColor": "#264F89",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "nodus-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "nodus-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stratum-1": {
+    "textColor": "#4E5C83",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stratum-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stratum-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "unio-1": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "unio-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "unio-3": {
+    "textColor": "#5D487F",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "frame-1": {
+    "textColor": "#224E49",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "frame-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "frame-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "core-1": {
+    "textColor": "#216459",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "core-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "core-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "foundry-1": {
+    "textColor": "#414C69",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "foundry-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "foundry-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "bridge-1": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "bridge-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "bridge-3": {
+    "textColor": "#275F85",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "launch-1": {
+    "textColor": "#334F7C",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "launch-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "launch-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stapel-1": {
+    "textColor": "#244F68",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stapel-2": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stapel-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stapel-4": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stapel-5": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "stapel-6": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "svod-1": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "svod-2": {
+    "textColor": "#476657",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "svod-3": {
+    "textColor": "#262626",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "modus-4": {
+    "textColor": "#274C82",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "osnova-4": {
+    "textColor": "#000000",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "frame-4": {
+    "textColor": "#000000",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-1": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-2": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-3": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-4": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-5": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-6": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-7": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-8": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-9": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-10": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-11": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-12": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-13": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-14": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-15": {
+    "textColor": "#245347",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-16": {
+    "textColor": "#377AA5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-17": {
+    "textColor": "#377AA5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-18": {
+    "textColor": "#377AA5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-19": {
+    "textColor": "#377AA5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-20": {
+    "textColor": "#377AA5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "innesto-21": {
+    "textColor": "#377AA5",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "innesto-38": {
+    "textColor": "#727D7A",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-39": {
+    "textColor": "#355951",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-46": {
+    "textColor": "#6C3333",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-47": {
+    "textColor": "#5D7770",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-34": {
+    "textColor": "#155D88",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-35": {
+    "textColor": "#155D88",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "quarter-6": {
+    "textColor": "#264F69",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "quarter-5": {
+    "textColor": "#C75E3F",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "quarter-4": {
+    "textColor": "#6C4A8B",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "quarter-3": {
+    "textColor": "#2D55A2",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "quarter-2": {
+    "textColor": "#265449",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "quarter-1": {
+    "textColor": "#008B58",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "cube-reference-p": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "integrum-4": {
+    "textColor": "#503589",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "aptus-4": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "aptus-5": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "aptus-6": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "aptus-7": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "aptus-8": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "karamel-1": {
+    "textColor": "#A74836",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "karamel-2": {
+    "textColor": "#934111",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "karamel-3": {
+    "textColor": "#934111",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  }
+}

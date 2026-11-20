@@ -15,23 +15,25 @@ const mockupStyles = await load('mockup.css')
 const mockupScript = await load('mockup.js')
 const interfaceSource = await load('prototype/lh-invest-interface.html')
 const productDocument = await load('product-document.js')
+const markStyles = JSON.parse(await load('mark-styles.json'))
 const variants = await Promise.all(Object.entries(catalog).flatMap(([group, concept]) =>
   concept.items.filter(item => item.mark).map(async item => {
     const svg = await load('assets/' + item.mark)
     const palette = [...new Set(Array.from(svg.matchAll(/(?:fill|stop-color)="(#[\da-f]{6})"/gi), match => match[1]))]
-    if (!palette.length) palette.push(...new Set(Array.from(svg.matchAll(/stroke="(#[\da-f]{6})"/gi), match => match[1])))
+    for (const match of svg.matchAll(/stroke="(#[\da-f]{6})"/gi)) if (!palette.some(color => color.toLowerCase() === match[1].toLowerCase())) palette.push(match[1])
     const neutral = palette.length === 1 && /^#(?:000000|242424|262626|1[0-9a-f]{5}|2[0-9a-f]{5})$/i.test(palette[0])
     const groupColors = { modus: '#274C82', osnova: '#245E50', sostav: '#687F50', aptus: '#285B72', integrum: '#57418B', totum: '#705188', nodus: '#365B94', stratum: '#655D50', unio: '#846283', frame: '#245E50', core: '#B2583A', foundry: '#805B47', bridge: '#315D84', launch: '#CA5D35', stapel: '#315B7B', svod: '#346457', 'svod-lh': '#4F5382', karamel: '#a74836', innesto: '#245347' }
     const ownColor = groupColors[group] || '#315D84'
     const brandPalette = neutral ? [ownColor] : palette
     const brandSvg = neutral ? svg.replace(new RegExp(palette[0], 'gi'), ownColor) : svg
-    const textColor = neutral ? '#262626' : (group === 'innesto' ? '#294b62' : ownColor)
-    return { id: item.key, group: concept.title, label: item.label, name: concept.title, textColor,
+    const style = markStyles[item.key]
+    if (!style) throw new Error('Missing mark style: ' + item.key)
+    return { id: item.key, group: concept.title, label: item.label, name: concept.title, ...style,
       sub: 'Инвестиционная платформа', svg, palette, brandSvg, brandPalette, series: item.series }
   })))
 
 // Saved favorites refer to the index of a mark. Keep the first 57 slots stable.
-const seriesOrder = item => item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
+const seriesOrder = item => item.series === 'karamel-candy-round' ? 10 : item.series === 'karamel-candy-chart' ? 9 : item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
 variants.sort((a, b) => seriesOrder(a) - seriesOrder(b))
 
 const formats = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.avif': 'avif' }

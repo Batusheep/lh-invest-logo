@@ -124,7 +124,7 @@ const groups = [
     ["Ромб с переходами", "innesto/innesto-34", "innesto-study"],
     ["Квадрат с переходами", "innesto/innesto-35", "innesto-study"],
   ]],
-  ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"]]],
+  ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"], ["Карамельная диаграмма", "round-02/karamel/karamel-2", "karamel-candy-chart"], ["Круглая карамельная диаграмма", "round-02/karamel/karamel-3", "karamel-candy-round"]]],
   ["tessera", "Tessera", "#ECEBE5", []],
   ["launvest", "Launvest", "#ECEBE5", []],
   ["investomika", "Инвестомика", "#ECEBE5", []],
