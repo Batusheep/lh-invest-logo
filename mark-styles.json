@@ -676,5 +676,95 @@
     "fontFamily": "RobotoLocal",
     "fontWeight": 600,
     "fontStretch": "100%"
+  },
+  "innesto-60": {
+    "textColor": "#111111",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-61": {
+    "textColor": "#4C08AD",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-62": {
+    "textColor": "#360D87",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-63": {
+    "textColor": "#171717",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "tessera-1": {
+    "textColor": "#194C3C",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "innesto-64": {
+    "textColor": "#0ABCB6",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 500,
+    "fontStretch": "100%"
+  },
+  "innesto-65": {
+    "textColor": "#2821D0",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 500,
+    "fontStretch": "100%"
+  },
+  "innesto-66": {
+    "textColor": "#15253F",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 500,
+    "fontStretch": "100%"
+  },
+  "f-flow": {
+    "textColor": "#007D46",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 500,
+    "fontStretch": "100%"
+  },
+  "p-modular": {
+    "textColor": "#50572B",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 500,
+    "fontStretch": "100%"
+  },
+  "innesto-67": {
+    "textColor": "#222222",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 700,
+    "fontStretch": "100%"
+  },
+  "innesto-68": {
+    "textColor": "#172821",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-69": {
+    "textColor": "#171717",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-70": {
+    "textColor": "#171717",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
+  },
+  "innesto-71": {
+    "textColor": "#171717",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
   }
 }

@@ -134,9 +134,21 @@ const groups = [
     ["Двойная объёмная М", "round-02/innesto/innesto-57", "innesto-modular-forms"],
     ["Двойная М · синий и розовый", "round-02/innesto/innesto-58", "innesto-modular-forms"],
     ["Двойная М · графит и оранжевый", "round-02/innesto/innesto-59", "innesto-modular-forms"],
+    ["Переплетённые скругления", "round-02/innesto/innesto-60", "innesto-reference-four"],
+    ["М с квадратами", "round-02/innesto/innesto-61", "innesto-reference-four"],
+    ["Составная D", "round-02/innesto/innesto-62", "innesto-reference-four"],
+    ["Куб с просветом", "round-02/innesto/innesto-63", "innesto-reference-four"],
+    ["Три соединённых узла", "round-02/innesto/innesto-64", "innesto-nodes-grid"],
+    ["Три узла и точка", "round-02/innesto/innesto-65", "innesto-nodes-grid"],
+    ["Сетка звёзд", "round-02/innesto/innesto-66", "innesto-nodes-grid"],
+    ["Угловой модуль", "round-02/innesto/innesto-67", "innesto-angle-module"],
+    ["Ступенчатые узлы", "round-02/innesto/innesto-68", "innesto-stepped-nodes"],
+    ["Плавный контур · цельный", "round-02/innesto/innesto-69", "innesto-fluid-outline"],
+    ["Плавный контур · стыки", "round-02/innesto/innesto-70", "innesto-fluid-outline"],
+    ["Плавный контур · диагонали", "round-02/innesto/innesto-71", "innesto-fluid-outline"],
   ]],
   ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"], ["Карамельная диаграмма", "round-02/karamel/karamel-2", "karamel-candy-chart"], ["Круглая карамельная диаграмма", "round-02/karamel/karamel-3", "karamel-candy-round"], ["Лента-леденец", "round-02/karamel/karamel-4", "karamel-candy-ribbon"]]],
-  ["tessera", "Tessera", "#ECEBE5", []],
+  ["tessera", "Tessera", "#ECEBE5", [["Мозаичный узел", "round-02/tessera/tessera-1", "tessera-mosaic"]]],
   ["launvest", "Launvest", "#ECEBE5", []],
   ["investomika", "Инвестомика", "#ECEBE5", []],
   ["investport", "Инвестпорт", "#ECEBE5", []],
@@ -186,3 +198,6 @@ catalog.innesto.items.push({ key: 'f-rounded-black', unassigned: true, markGroup
 catalog.innesto.items.push({ key: 'f-rounded-color', unassigned: true, markGroup: 'Знаки F', label: 'Мягкая F · цветная', mark: 'round-02/f-marks/f-rounded-color.svg', file: 'round-02/f-marks/f-rounded-color-board.png', series: 'f-marks' })
 catalog.innesto.items.push({ key: 'f-block-black', unassigned: true, markGroup: 'Знаки F', label: 'Модульная F · чёрная', mark: 'round-02/f-marks/f-block-black.svg', file: 'round-02/f-marks/f-block-black-board.png', series: 'f-marks' })
 catalog.innesto.items.push({ key: 'f-block-color', unassigned: true, markGroup: 'Знаки F', label: 'Модульная F · цветная', mark: 'round-02/f-marks/f-block-color.svg', file: 'round-02/f-marks/f-block-color-board.png', series: 'f-marks' })
+
+catalog.innesto.items.push({ key: 'f-flow', unassigned: true, markGroup: 'Знаки F', label: 'Плавная F', mark: 'round-02/f-marks/f-flow.svg', file: 'round-02/f-marks/f-flow-board.png', series: 'f-flow' })
+catalog.innesto.items.push({ key: 'p-modular', unassigned: true, markGroup: 'Знаки P', label: 'Модульная P', mark: 'round-02/p-marks/p-modular.svg', file: 'round-02/p-marks/p-modular-board.png', series: 'p-modular' })
