@@ -7,6 +7,13 @@
 
   function identity(control) {
     if (control.id) return '#' + CSS.escape(control.id)
+    if (control.dataset.act) {
+      const scope = control.closest('.hero') ? '.hero ' : control.closest('.panel') ? '.panel ' : '';
+      return scope + '[data-act="' + CSS.escape(control.dataset.act) + '"]';
+    }
+    for (const key of ['edit', 'delete']) {
+      if (control.dataset[key] !== undefined) return '[data-' + key + '="' + CSS.escape(control.dataset[key]) + '"]';
+    }
     const { focus, action, lane, value } = control.dataset
     if (focus) return '[data-focus="' + CSS.escape(focus) + '"]'
     return action && ['action', 'lane', 'value'].filter(key => control.dataset[key] !== undefined)

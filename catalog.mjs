@@ -26,6 +26,7 @@ const groups = [
     ["Узлы А", "round-02/aptus/aptus-6", "aptus-reference"],
     ["А в квадрате", "round-02/aptus/aptus-7", "aptus-reference"],
     ["А в квадрате · инверсия", "round-02/aptus/aptus-8", "aptus-reference"],
+    ["Модульная рамка · крупная А", "round-02/aptus/aptus-9", "aptus-large-a"],
   ]],
   ["integrum", "Integrum", "#E8E7EF", [
     ["Замкнутый пояс", "round-02/integrum/integrum-1-color"],
@@ -124,7 +125,7 @@ const groups = [
     ["Ромб с переходами", "innesto/innesto-34", "innesto-study"],
     ["Квадрат с переходами", "innesto/innesto-35", "innesto-study"],
   ]],
-  ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"], ["Карамельная диаграмма", "round-02/karamel/karamel-2", "karamel-candy-chart"], ["Круглая карамельная диаграмма", "round-02/karamel/karamel-3", "karamel-candy-round"]]],
+  ["karamel", "Карамель", "#ECEBE5", [["Спираль роста", "round-02/karamel/karamel-1", "karamel-study"], ["Карамельная диаграмма", "round-02/karamel/karamel-2", "karamel-candy-chart"], ["Круглая карамельная диаграмма", "round-02/karamel/karamel-3", "karamel-candy-round"], ["Лента-леденец", "round-02/karamel/karamel-4", "karamel-candy-ribbon"]]],
   ["tessera", "Tessera", "#ECEBE5", []],
   ["launvest", "Launvest", "#ECEBE5", []],
   ["investomika", "Инвестомика", "#ECEBE5", []],
@@ -168,4 +169,4 @@ export const catalog = Object.fromEntries(groups.map(([id, title, color, designs
 for (let i = 1; i <= 6; i++) {
   catalog.innesto.items.unshift({ key: 'quarter-' + i, label: 'Четверть круга · ' + i, file: 'new-marks/quarter-' + i + '-board.png', mark: 'new-marks/quarter-' + i + '.svg', background: '#ECEBE5', series: 'quarter-circle' })
 }
-catalog.innesto.items.unshift({ key: 'cube-reference-p', label: 'Куб Р · 6 · 9', file: 'new-marks/cube-p-board.png', mark: 'new-marks/cube-p.svg', background: '#ECEBE5', series: 'cube-reference' })
+catalog.innesto.items.unshift({ key: 'cube-reference-p', unassigned: true, label: 'Куб Р · 6 · 9', file: 'new-marks/cube-p-board.png', mark: 'new-marks/cube-p.svg', background: '#ECEBE5', series: 'cube-reference' })

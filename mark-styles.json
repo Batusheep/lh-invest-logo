@@ -580,5 +580,17 @@
     "fontFamily": "RobotoLocal",
     "fontWeight": 600,
     "fontStretch": "100%"
+  },
+  "aptus-9": {
+    "textColor": "#242424",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 400,
+    "fontStretch": "100%"
+  },
+  "karamel-4": {
+    "textColor": "#202124",
+    "fontFamily": "RobotoLocal",
+    "fontWeight": 600,
+    "fontStretch": "100%"
   }
 }

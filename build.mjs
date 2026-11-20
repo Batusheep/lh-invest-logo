@@ -28,12 +28,12 @@ const variants = await Promise.all(Object.entries(catalog).flatMap(([group, conc
     const brandSvg = neutral ? svg.replace(new RegExp(palette[0], 'gi'), ownColor) : svg
     const style = markStyles[item.key]
     if (!style) throw new Error('Missing mark style: ' + item.key)
-    return { id: item.key, group: concept.title, label: item.label, name: concept.title, ...style,
+    return { id: item.key, group: item.unassigned ? 'Отдельные знаки' : concept.title, label: item.label, name: item.unassigned ? null : concept.title, unassigned: !!item.unassigned, ...style,
       sub: 'Инвестиционная платформа', svg, palette, brandSvg, brandPalette, series: item.series }
   })))
 
 // Saved favorites refer to the index of a mark. Keep the first 57 slots stable.
-const seriesOrder = item => item.series === 'karamel-candy-round' ? 10 : item.series === 'karamel-candy-chart' ? 9 : item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
+const seriesOrder = item => item.series === 'karamel-candy-ribbon' ? 12 : item.series === 'aptus-large-a' ? 11 : item.series === 'karamel-candy-round' ? 10 : item.series === 'karamel-candy-chart' ? 9 : item.series === 'karamel-study' ? 8 : item.series === 'aptus-reference' ? 7 : item.series === 'flat-chart' ? 6 : item.series === 'cube-reference' ? 5 : item.series === 'quarter-circle' ? 4 : item.series === 'innesto-study' ? 2 : item.series === 'box-study' ? 1 : 0
 variants.sort((a, b) => seriesOrder(a) - seriesOrder(b))
 
 const formats = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.avif': 'avif' }
@@ -86,7 +86,7 @@ const font = await readFile(relative('../frontend/assets/fonts/Roboto-Variable.t
 const [newShell, newStyles, newScript] = await Promise.all(['new-shell.html', 'new-studio.css', 'new-studio.js'].map(load))
 const result = newShell
   .replace('<!-- STYLES -->', () => '<style>@font-face{font-family:RobotoLocal;src:url(data:font/ttf;base64,' + font.toString('base64') + ');font-weight:100 900;font-stretch:75% 100%}\n' + newStyles + '\n</style>')
-  .replace('<!-- SCRIPTS -->', () => '<script>' + morphicons + '\nconst variants = ' + studioVariants + ';\nconst concepts = ' + data + ';\nconst productInterface = ' + JSON.stringify(interfaceSource).replaceAll('<', '\\u003c') + ';\n' + productDocument + '\nconst shortlistNames = ' + JSON.stringify(shortlistNames).replaceAll('<', '\\u003c') + ';\n' + newScript + '\n;\n' + motion.replace("if (control.id) return", "if (control.dataset.act && control.querySelector('svg')) return '[data-act=\"' + CSS.escape(control.dataset.act) + '\"]';\n    if (control.id) return") + '\n</script>')
+  .replace('<!-- SCRIPTS -->', () => '<script>' + morphicons + '\nconst variants = ' + studioVariants + ';\nconst concepts = ' + data + ';\nconst productInterface = ' + JSON.stringify(interfaceSource).replaceAll('<', '\\u003c') + ';\n' + productDocument + '\nconst shortlistNames = ' + JSON.stringify(shortlistNames).replaceAll('<', '\\u003c') + ';\n' + newScript + '\n;\n' + motion + '\n</script>')
 
 await writeFile(relative('brand-review.html'), result, 'utf8')
 
