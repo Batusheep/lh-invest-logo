@@ -201,3 +201,41 @@ catalog.innesto.items.push({ key: 'f-block-color', unassigned: true, markGroup: 
 
 catalog.innesto.items.push({ key: 'f-flow', unassigned: true, markGroup: 'Знаки F', label: 'Плавная F', mark: 'round-02/f-marks/f-flow.svg', file: 'round-02/f-marks/f-flow-board.png', series: 'f-flow' })
 catalog.innesto.items.push({ key: 'p-modular', unassigned: true, markGroup: 'Знаки P', label: 'Модульная P', mark: 'round-02/p-marks/p-modular.svg', file: 'round-02/p-marks/p-modular-board.png', series: 'p-modular' })
+
+// Алфавитные знаки доступны независимо от выбранного названия.
+for (const [label, letter] of [
+  ['A · Черепаха', 'a'],
+  ['B · Бобр', 'b'],
+  ['C · Крокодил', 'c'],
+  ['D · Калла', 'd'],
+  ['E · Медуза', 'e'],
+  ['F · Попугай', 'f'],
+  ['G · Хамелеон', 'g'],
+  ['H · Слон', 'h'],
+  ['I · Пингвин', 'i'],
+  ['J · Морской конёк', 'j'],
+  ['K · Жук-олень', 'k'],
+  ['L · Фламинго', 'l'],
+  ['M · Летучая мышь', 'm'],
+  ['N · Змея', 'n'],
+  ['O · Карпы кои', 'o'],
+  ['P · Пеликан', 'p'],
+  ['Q · Головастик', 'q'],
+  ['R · Заяц', 'r'],
+  ['S · Угорь', 's'],
+  ['T · Гриб', 't'],
+  ['U · Тюльпан', 'u'],
+  ['V · Ласточка', 'v'],
+  ['W · Волк', 'w'],
+  ['X · Бабочка', 'x'],
+  ['Y · Росток', 'y'],
+  ['Z · Зебра', 'z'],
+]) {
+  catalog.innesto.items.push({ key: `animal-letter-${letter}`, unassigned: true, markGroup: "Живой алфавит", label, mark: `round-02/animal-alphabet/${letter}.svg`, file: `round-02/animal-alphabet/${letter}-board.png`, series: "animal-alphabet" })
+}
+
+
+// Векторные варианты, предоставленные пользователем.
+for (let n = 31; n <= 41; n++) {
+  catalog.innesto.items.push({ key: `frame-vector-${n}`, unassigned: true, markGroup: "Векторные варианты", label: `Frame ${n}`, mark: `round-02/frame-vectors/frame-${n}.svg`, file: `round-02/frame-vectors/frame-${n}-board.png`, series: "frame-vectors" })
+}
