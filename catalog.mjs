@@ -157,6 +157,10 @@ const groups = [
   ["plugfin", "PlugFin", "#ECEBE5", []],
   ["nodeinvest", "NodeInvest", "#ECEBE5", []],
   ["investmesh", "InvestMesh", "#ECEBE5", []],
+  ["almazinvestitsii", "Алмаз", "#ECEBE5", []],
+  ["belayavizitka", "Белая визитка", "#ECEBE5", []],
+  ["belylabel", "Белый лейбл", "#ECEBE5", []],
+  ["belayaetiketka", "Белая этикетка", "#ECEBE5", []],
   ["investbox", "InvestBox", "#ECEBE5", []],
   ["financialbox", "Financial Box", "#ECEBE5", []],
   ["finbox", "FinBox", "#ECEBE5", []],
@@ -178,6 +182,10 @@ const spellings = {
   plugfin: ['Плагфин', 'PlugFin'],
   nodeinvest: ['Нодинвест', 'NodeInvest'],
   investmesh: ['Инвестмеш', 'InvestMesh'],
+  almazinvestitsii: ['Алмаз', 'Almaz'],
+  belayavizitka: ['Белая визитка', 'Belaya Vizitka'],
+  belylabel: ['Белый лейбл', 'Bely Label'],
+  belayaetiketka: ['Белая этикетка', 'Belaya Etiketka'],
   investbox: ['Инвестбокс', 'InvestBox'],
   financialbox: ['Файнэншл Бокс', 'Financial Box'],
   finbox: ['Финбокс', 'FinBox'],
@@ -256,6 +264,9 @@ for (const [n, stem, label] of [
   [39, "modular-knot", "Модульный узел"],
   [40, "angled-outline", "Угловой контур"],
   [41, "angled-outline-color", "Угловой контур · цветной"],
+  [46, "white-card-dark", "Белая визитка · тёмный"],
+  [47, "diamond-blue-on-light", "Алмаз · синий на светлом"],
+  [423, "diamond-pearl-on-light", "Алмаз · перламутровый на светлом"],
 ]) {
   catalog.innesto.items.push({ key: `frame-vector-${n}`, unassigned: true, markGroup: "Векторные варианты", label, mark: `round-02/frame-vectors/${stem}.svg`, file: `round-02/frame-vectors/${stem}-board.png`, series: "frame-vectors" })
 }

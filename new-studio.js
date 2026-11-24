@@ -1,5 +1,5 @@
 const groups=[...new Set(variants.map(v=>v.group))]
-const namingFamilies=[{label:'Мост',names:['Bridge','Инвестобридж']},{label:'Узел',names:['Nodus','NodeInvest']}]
+const namingFamilies=[{label:'Мост',names:['Bridge','Инвестобридж']},{label:'Узел',names:['Nodus','NodeInvest']},{label:'Белый лейбл',names:['Белый лейбл','Белая визитка','Белая этикетка']}]
 const allNames=[...new Set([...shortlistNames,...variants.filter(v=>!v.unassigned).map(v=>v.group)])]
 const names=allNames.flatMap(n=>{const family=namingFamilies.find(f=>f.names.includes(n));return family?(family.names.find(x=>allNames.includes(x))===n?family.names.filter(x=>allNames.includes(x)):[]):[n]})
 function nameOptions(selected){return names.map(n=>{const family=namingFamilies.find(f=>f.names.includes(n));if(family&&family.names.find(x=>names.includes(x))!==n)return '';const option=x=>'<option '+(x===selected?'selected':'')+'>'+esc(x)+'</option>';return family?'<optgroup label="'+esc(family.label)+'">'+family.names.filter(x=>names.includes(x)).map(option).join('')+'</optgroup>':option(n)}).join('')}
@@ -13,6 +13,7 @@ const icons = {
 const savedKey='lh-logo-favorites-v1'
 let favorites=[]
 try{favorites=JSON.parse(localStorage.getItem(savedKey)||'[]');if(!Array.isArray(favorites))favorites=[]}catch{}
+try{let changed=false;favorites.forEach(f=>{if(f.name==='Алмаз инвестиции'){f.name='Алмаз';changed=true}});if(changed)localStorage.setItem(savedKey,JSON.stringify(favorites))}catch{}
 try {
   const migrationKey = 'lh-logo-favorites-innesto-selection-v1'
   if (!localStorage.getItem(migrationKey)) {
@@ -43,6 +44,7 @@ try {
 } catch {}
 try{const migrationKey='lh-logo-favorites-remove-innesto-48-v1';if(!localStorage.getItem(migrationKey)){favorites=favorites.filter(f=>f.mark!==99);localStorage.setItem(savedKey,JSON.stringify(favorites));localStorage.setItem(migrationKey,'1')}}catch{}
 try{const migrationKey='lh-logo-favorites-remove-innesto-51-v1';if(!localStorage.getItem(migrationKey)){favorites=favorites.filter(f=>f.mark!==105);favorites.forEach(f=>{if(f.mark>105)f.mark--});localStorage.setItem(savedKey,JSON.stringify(favorites));localStorage.setItem(migrationKey,'1')}}catch{}
+try{const key='lh-logo-favorites-remove-three-marks-v1';if(!localStorage.getItem(key)){favorites=favorites.filter(f=>![165,166,167].includes(f.mark));favorites.forEach(f=>{if(f.mark>167)f.mark-=3});localStorage.setItem(savedKey,JSON.stringify(favorites));localStorage.setItem(key,'1')}}catch{}
 let mode='edit', editing=null, markView='grid'
 const defaultMark = Math.max(0, variants.findIndex(v => v.id === 'innesto-1'))
 let state={mark:defaultMark,name:'Innesto',language:'ru',invest:false,subtitle:'Инвестиционная платформа',colors:[...variants[defaultMark].palette],text:variants[defaultMark].textColor||'#262626',palette:'original'}
@@ -86,7 +88,7 @@ function mountProduct(s){
 }
 function chooseMark(index){const direction=index<state.mark?-1:1;index=(index+variants.length)%variants.length;while(!variants[index].unassigned&&!names.includes(variants[index].group))index=(index+direction+variants.length)%variants.length;state.mark=index;const v=variants[state.mark];state.colors=state.palette==='original'?[...v.palette]:v.palette.map((_,i)=>state.colors[i%state.colors.length]||'#262626');if(state.palette==='original')state.text=v.textColor||'#262626'}
 const markVariants=variants.filter(v=>v.unassigned||names.includes(v.group))
-const readyVariants=[...groups.filter(g=>names.includes(g)).flatMap(g=>variants.filter(v=>v.group===g&&!v.unassigned)),...names.filter(n=>/f/i.test(n)).flatMap(name=>variants.filter(v=>v.group==='Знаки F').map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...names.filter(n=>/^[tт]/i.test(n)&&n!=='Tessera').flatMap(name=>variants.filter(v=>v.id==='tessera-1').map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...names.filter(n=>/p/i.test(Object.values(concepts).find(c=>c.title===n)?.spellings?.latin||n)).flatMap(name=>variants.filter(v=>v.group==='Знаки P').map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...['InvestBox','Financial Box','FinBox','Invest Day'].filter(name=>names.includes(name)).flatMap(name=>variants.filter(v=>v.series==='frame-vectors').map(v=>({...v,name,group:name,presetId:v.id+'::'+name})))]
+const readyVariants=[...groups.filter(g=>names.includes(g)).flatMap(g=>variants.filter(v=>v.group===g&&!v.unassigned)),...names.filter(n=>/f/i.test(n)).flatMap(name=>variants.filter(v=>v.group==='Знаки F').map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...names.filter(n=>/^[tт]/i.test(n)&&n!=='Tessera').flatMap(name=>variants.filter(v=>v.id==='tessera-1').map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...names.filter(n=>/p/i.test(Object.values(concepts).find(c=>c.title===n)?.spellings?.latin||n)).flatMap(name=>variants.filter(v=>v.group==='Знаки P').map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...['InvestBox','Financial Box','FinBox','Invest Day'].filter(name=>names.includes(name)).flatMap(name=>variants.filter(v=>v.series==='frame-vectors'&&Number(v.id.slice(13))<=41).map(v=>({...v,name,group:name,presetId:v.id+'::'+name}))),...[['Алмаз',[47,423]],['Белая визитка',[46]]].filter(([name])=>names.includes(name)).flatMap(([name,ids])=>variants.filter(v=>ids.includes(Number(v.id.slice(13)))&&v.series==='frame-vectors').map(v=>({...v,name,group:name,presetId:v.id+'::'+name})))]
 const palettes=[{id:'original',label:'Исходная',colors:null},{id:'ink',label:'Графит',colors:['#262626']},{id:'blue',label:'Синий',colors:['#28528a']},{id:'forest',label:'Зелёный и терракота',colors:['#245e50','#c15e3b']},{id:'violet',label:'Фиолетовый и бирюза',colors:['#57418b','#168478']}]
 function applyPreset(id){const preset=readyVariants.find(v=>(v.presetId||v.id)===id);if(!preset)return;const i=variants.findIndex(v=>v.id===preset.id);if(i<0)return;state.palette='original';chooseMark(i);state.name=preset.name;state.language=/[А-Яа-яЁё]/.test(state.name)?'ru':'latin';state.invest=false}
 function applyPalette(id){const p=palettes.find(p=>p.id===id);if(!p)return;state.palette=id;const v=variants[state.mark], colors=p.colors||v.palette;state.colors=v.palette.map((_,i)=>colors[i%colors.length]);state.text=id==='original'?(v.textColor||'#262626'):colors[0]}
