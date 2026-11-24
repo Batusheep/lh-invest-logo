@@ -157,6 +157,10 @@ const groups = [
   ["plugfin", "PlugFin", "#ECEBE5", []],
   ["nodeinvest", "NodeInvest", "#ECEBE5", []],
   ["investmesh", "InvestMesh", "#ECEBE5", []],
+  ["investbox", "InvestBox", "#ECEBE5", []],
+  ["financialbox", "Financial Box", "#ECEBE5", []],
+  ["finbox", "FinBox", "#ECEBE5", []],
+  ["investday", "Invest Day", "#ECEBE5", []],
 ]
 
 const spellings = {
@@ -174,6 +178,10 @@ const spellings = {
   plugfin: ['Плагфин', 'PlugFin'],
   nodeinvest: ['Нодинвест', 'NodeInvest'],
   investmesh: ['Инвестмеш', 'InvestMesh'],
+  investbox: ['Инвестбокс', 'InvestBox'],
+  financialbox: ['Файнэншл Бокс', 'Financial Box'],
+  finbox: ['Финбокс', 'FinBox'],
+  investday: ['Инвест Дэй', 'Invest Day'],
   karamel: ['Карамель', 'Karamel'], innesto: ['Иннесто', 'Innesto'], tessera: ['Тессера', 'Tessera'], launvest: ['Лонвест', 'Launvest'],
 }
 
@@ -236,6 +244,18 @@ for (const [label, letter] of [
 
 
 // Векторные варианты, предоставленные пользователем.
-for (let n = 31; n <= 41; n++) {
-  catalog.innesto.items.push({ key: `frame-vector-${n}`, unassigned: true, markGroup: "Векторные варианты", label: `Frame ${n}`, mark: `round-02/frame-vectors/frame-${n}.svg`, file: `round-02/frame-vectors/frame-${n}-board.png`, series: "frame-vectors" })
+for (const [n, stem, label] of [
+  [31, "diamond-and-outline", "Ромб в контуре"],
+  [32, "investbox-wordmark", "InvestBox · надпись"],
+  [33, "finbox-modular-composition", "FinBox · модульная композиция"],
+  [34, "investbox-perspective-outline", "InvestBox · контур в перспективе"],
+  [35, "kilson-perspective-color", "Кильсон · цветная перспектива"],
+  [36, "investbox-open-brackets", "InvestBox · раскрытые скобы"],
+  [37, "investbox-paired-brackets", "InvestBox · парные скобы"],
+  [38, "cube-lettering", "Куб с надписями"],
+  [39, "modular-knot", "Модульный узел"],
+  [40, "angled-outline", "Угловой контур"],
+  [41, "angled-outline-color", "Угловой контур · цветной"],
+]) {
+  catalog.innesto.items.push({ key: `frame-vector-${n}`, unassigned: true, markGroup: "Векторные варианты", label, mark: `round-02/frame-vectors/${stem}.svg`, file: `round-02/frame-vectors/${stem}-board.png`, series: "frame-vectors" })
 }
